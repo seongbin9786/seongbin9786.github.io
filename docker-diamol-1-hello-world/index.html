@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>[1 Month Docker] 1. Docker의 기본 컨셉과 Hello World - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Docker의 기본 컨셉을 다루고, 간단한 Hello World를 실습한다.  build, share, run:  build: (생략) share: DockerHub에서 이미지를 공유할 수 있다. run: 공유된 이미지를 통해 누구나 컨테이너를 실행할 수 있다.  이미지? 일단 Docker의 재사용 단위라고 생각하자. 도커 컨테이너? 애플리케이션을 담은 박"><meta property="og:type" content="blog"><meta property="og:title" content="[1 Month Docker] 1. Docker의 기본 컨셉과 Hello World"><meta property="og:url" content="https://jsqna.com/docker-diamol-1-hello-world/"><meta property="og:site_name" content="JS QnA"><meta property="og:description" content="Docker의 기본 컨셉을 다루고, 간단한 Hello World를 실습한다.  build, share, run:  build: (생략) share: DockerHub에서 이미지를 공유할 수 있다. run: 공유된 이미지를 통해 누구나 컨테이너를 실행할 수 있다.  이미지? 일단 Docker의 재사용 단위라고 생각하자. 도커 컨테이너? 애플리케이션을 담은 박"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:published_time" content="2021-01-02T12:30:00.000Z"><meta property="article:modified_time" content="2021-01-19T07:03:05.410Z"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="Docker"><meta property="article:tag" content="1 Month Docker"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com/docker-diamol-1-hello-world/"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"datePublished":"2021-01-02T12:30:00.000Z","dateModified":"2021-01-19T07:03:05.410Z","author":{"@type":"Person","name":"Seongbin Kim"},"description":"Docker의 기본 컨셉을 다루고, 간단한 Hello World를 실습한다.  build, share, run:  build: (생략) share: DockerHub에서 이미지를 공유할 수 있다. run: 공유된 이미지를 통해 누구나 컨테이너를 실행할 수 있다.  이미지? 일단 Docker의 재사용 단위라고 생각하자. 도커 컨테이너? 애플리케이션을 담은 박"}</script><link rel="canonical" href="https://jsqna.com/docker-diamol-1-hello-world/"><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-01-02T12:30:00.000Z" title="2021-01-02T12:30:00.000Z">21-01-02</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-01-19T07:03:05.410Z" title="2021-01-19T07:03:05.410Z">21-01-19</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Docker/">Docker</a></span><span class="level-item">13분안에 읽기 (약 1933 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">[1 Month Docker] 1. Docker의 기본 컨셉과 Hello World</h1><div class="content"><p>Docker의 기본 컨셉을 다루고, 간단한 Hello World를 실습한다.</p>
+<hr>
+<p><strong><em>build, share, run</em></strong>:</p>
+<ul>
+<li>build: (생략)</li>
+<li>share: <em>DockerHub</em>에서 이미지를 공유할 수 있다.</li>
+<li>run: 공유된 이미지를 통해 누구나 컨테이너를 실행할 수 있다.</li>
+</ul>
+<p><strong>이미지?</strong> 일단 Docker의 재사용 단위라고 생각하자.</p>
+<p><strong>도커 컨테이너?</strong> 애플리케이션을 담은 박스.</p>
+<ul>
+<li><p>이 박스에는 기기명, IP 주소, 스토리지가 딸린, Docker에서 만들어낸 논리적인 가상 컴퓨터가 있다.</p>
+</li>
+<li><p>애플리케이션은 이 컴퓨터에서 실행된다.</p>
+</li>
+<li><p>박스 안의 애플리케이션은 박스 밖을 볼 수 없다.</p>
+</li>
+<li><p>이 박스는 여러 개가 동시에 실행될 수도 있다.</p>
+</li>
+<li><p>박스는 같은 실제 컴퓨터를 공유하면서 격리된 환경을 갖는다.</p>
+</li>
+</ul>
+<p><strong>일관된 작업 방식</strong>: 아무리 애플리케이션이 복잡하더라도 Docker Image 단위로 Share, Run 만 하면 된다. 몇 개의, 어떤 컴포넌트, 설정 파일, 라이브러리를 사용하는지는 중요하지 않다.</p>
+<p><strong>Portability</strong>: Docker가 있는 컴퓨터에선 명령어 하나로 곧바로 설치가 가능하다.</p>
+<p><strong>효율적인 자원 활용</strong>: 도커는 VM이 그렇듯, 여러 애플리케이션을 동시에 실행하는 것으로 컴퓨터 자원을 최대한 활용할 수 있다. 다만 VM보다 나은 점을 아래 표로 정리했다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">사용 자원</th>
+<th align="center">Docker</th>
+<th align="center">VM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Guest OS 사용 여부</td>
+<td align="center">No (커널 공유)</td>
+<td align="center">Yes</td>
+</tr>
+<tr>
+<td align="center">가상화 리소스 비용</td>
+<td align="center">매우 낮음 (커널 공유)</td>
+<td align="center">독립적인 OS 수준</td>
+</tr>
+<tr>
+<td align="center">Gust OS Update 다운로드</td>
+<td align="center">Base Image 교체</td>
+<td align="center">수동 설치</td>
+</tr>
+<tr>
+<td align="center">아주 작은 앱 띄우기</td>
+<td align="center">Yes</td>
+<td align="center">No</td>
+</tr>
+<tr>
+<td align="center">인수인계/배포 비용</td>
+<td align="center">A Dockerfile</td>
+<td align="center">hours of installation</td>
+</tr>
+</tbody></table>
+<p>책에서는 Guest OS License 비용 문제에서도 차이가 난다고 언급했지만, Docker Image 형태로 쓴다고 해서 License 비용이 낮아지거나 사라지지는 않을 것 같다. 반대로 대수가 늘어나기 때문에 Open Source 기반으로 사용하지 않을까 생각이 든다.</p>
+<p><a target="_blank" rel="noopener" href="https://indico.cern.ch/event/384358/contributions/909221/attachments/1170419/1689415/151014_hepix_wataru_takase.pdf">네이티브 vs Docker vs KVM(VM 계열) 벤치마크</a> p.19 참고</p>
+<p><strong>주요 도커 명령어</strong>:</p>
+<table>
+<thead>
+<tr>
+<th align="left">명령어</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">docker container ls</td>
+<td>실행 중인 컨테이너의 목록 표시</td>
+</tr>
+<tr>
+<td align="left">docker container ls –all</td>
+<td>전체 컨테이너의 목록 표시 (종료된 것 포함)</td>
+</tr>
+<tr>
+<td align="left">docker container run –detach {IMG}</td>
+<td>컨테이너를 백그라운드로 실행</td>
+</tr>
+<tr>
+<td align="left">docker container run –publish 8088:80 {IMG}</td>
+<td>Host의 8088 포트로 Listen하여 컨테이너의 80포트로 전달</td>
+</tr>
+<tr>
+<td align="left">docker container inspect {ID}</td>
+<td>컨테이너의 상세 정보를 JSON으로 출력</td>
+</tr>
+<tr>
+<td align="left">docker container stats {ID}</td>
+<td>컨테이너가 사용하는 Host 자원 출력</td>
+</tr>
+<tr>
+<td align="left">docker container rm (–force) {ID}</td>
+<td>컨테이너를 완전히 제거 (실행 중인 경우 force)</td>
+</tr>
+<tr>
+<td align="left">docker container rm –force $(docker container ls –all – quiet)</td>
+<td>모든 컨테이너를 강제 제거</td>
+</tr>
+</tbody></table>
+<p>종료된 컨테이너는 제거된 것이 아니어서 계속 용량을 차지하며, 아래 작업이 가능하다.</p>
+<ul>
+<li>그대로 다시 실행</li>
+<li>컨테이너 내의 App이 생성한 로그를 확인</li>
+<li>파일을 Host에서 or Host로 복사</li>
+</ul>
+<p><strong>컨테이너의 네트워크</strong>:</p>
+<ul>
+<li><p>기본적으로, 각 컨테이너는 Host 네트워크에 대해 격리된다. 컨테이너는 Host 내의 가상 사설망으로 구성된다.</p>
+</li>
+<li><p>Docker는 Host의 네트워크 트래픽을 가로채 컨테이너로 보낼 수 있다.</p>
+</li>
+</ul>
+<p><strong>Docker가 컨테이너를 실행하는 방법</strong>:</p>
+<p><strong>Docker Engine</strong>은 Docker Backend이다. Docker API(HTTP 기반의 REST API)를 제공한다. 이미지 재사용에 관한 기능은 직접 하고, 컨테이너는 <code>containerd</code>에 기반해 관리한다고 한다. containerd는 CNCF에 의해 관리되는 오픈소스 프로젝트이다.</p>
+<p><strong>Docker CLI</strong>: Docker의 Frontend이다. Docker Engine과 소통하는 방법을 제공한다.</p>
+<p><strong>기타 정보</strong>:</p>
+<p>Docker는 가장 인기가 많은 컨테이너 플랫폼이지만, 다른 기술도 있으며 컨테이너 기술로 인해 플랫폼에 락인될 걱정은 하지 않아도 된다.</p>
+<p>Docker는 이미지를 사용해 컨테이너를 실행한다. 이 때 이미지가 로컬에 있어야 한다. <code>docker container run</code>을 할 때에 없으면 <code>docker pull</code>을 받게 된다. 한 번 다운로드한 이미지는 재사용한다.</p>
+<p>도커 컨테이너 Id는 컨테이너의 hostname이 된다.</p>
+<p>컨테이너를 선택할 때, 이름 앞 몇글자만 입력해도 된다. 예: <code>f1695...</code>일 때, <code>docker container top f1</code>만 해도 된다.</p>
+<hr>
+<h3 id="실습"><a href="#실습" class="headerlink" title="실습"></a>실습</h3><p><a target="_blank" rel="noopener" href="https://github.com/sixeyed/diamol/tree/master/ch02/lab">솔루션</a></p>
+<p><strong>목표</strong>: 실행 중인 Apache 컨테이너에서 index.html을 변경하라.</p>
+<p><strong>힌트</strong>:</p>
+<ul>
+<li><p>컨테이너는 독립된 파일 시스템을 가지며, 컨테이너 내의 웹 서버 또한 컨테이너의 파일 시스템의 파일을 제공한다.</p>
+</li>
+<li><p><code>docker container</code> 명령어를 통해 컨테이너에서 수행할 수 있는 명령어 목록을 볼 수 있다.</p>
+</li>
+<li><p><code>docker &#123;command&#125; --help</code>를 통해 해당 명령어의 상세 설명을 확인할 수 있다.</p>
+</li>
+<li><p><code>diamol/ch02-hello-diamol-web</code> 이미지는 <code>/usr/local/apache2/htdocs</code> 폴더 내의 파일을 정적으로 제공한다. (윈도우의 경우, <code>C:\user\local\apache2\htdocs</code> 폴더.)</p>
+</li>
+</ul>
+<hr>
+<h3 id="내-풀이"><a href="#내-풀이" class="headerlink" title="내 풀이"></a>내 풀이</h3><p>풀이 과정을 서술함.</p>
+<p><strong>1. 제공된 컨테이너 트러블 슈팅</strong>: 일단 <code>ch02-hello-diamol-web</code> 의 기본 포트인 8088은 접속할 수가 없었다. 그래서 DockerHub 가서 <a target="_blank" rel="noopener" href="https://hub.docker.com/_/httpd">Apache 이미지</a>를 받아서 실행해봤다. 8080 포트로 잘 되더라. 이 때 명령어가 <code>$ docker run -dit --name my-apache-app -p 8080:80 -v &quot;$PWD&quot;:/usr/local/apache2/htdocs/ httpd:2.4</code> 였는데, 배운 점:</p>
+<ul>
+<li><code>-dit</code>: <code>--detach --interactive</code>의 약자인데, <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/41916435/practically-what-is-the-difference-between-docker-run-dit-itd-vs-docker-run">-dit가 필요한 이유</a>를 보면, bash 스크립트가 엔트리 포인트인 경우 <code>-d</code>만 하면 정지된 상태에서 아무것도 못한다고 한다. <code>-it</code>를 줘서 셸이 있어야 스크립트가 실행된다고 한다.</li>
+<li><code>-p</code>: <code>--publish</code>의 약자이다.</li>
+<li><code>-v</code>: 아직 안 배웠지만, 볼륨 개념일 것으로 추정된다.</li>
+</ul>
+<p>도커 자체의 네트워크 문제가 아님을 알고, 80으로 하니까 잘 됐는데, 이유는 모르겠다.</p>
+<p><strong>2. 컨테이너 셸 접속</strong>: 일단 <code>docker container exec -it --tty &#123;id&#125; /bin/bash</code> 로 접속할 순 있었다. (나오는건 exit 치면 된다.)</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22272401/what-does-it-mean-to-attach-a-tty-std-in-out-to-dockers-or-lxc"><code>--tty</code> 옵션에 대한 글</a> 참고</li>
+</ul>
+<p><strong>3. 직접 파일 수정</strong>: 무슨 망할 기반 이미지를 쓰는지 vi 밖에 지원을 하지 않아서 직접 수정은 포기했다. 파일을 복사해야 하는데, 어떻게 하는지 모르겠다.</p>
+<p><strong>4. 파일 복사 방법</strong>: Dockerfile을 수정하는 게 가장 쉬울 것 같았지만, 제공되지 않아서 할 수 없었다. 복사를 해야 하는데, <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22907231/how-to-copy-files-from-host-to-docker-container">호스트에서 컨테이너로 파일 복사하기</a>로 <code>docker cp</code> 명령어를 배워서 수행했고, 성공했다.</p>
+<hr>
+<p>매우 작은 작업이었지만 너무 오랜 기간이 걸렸다. 아무래도 기록하면서 하니까 오래 걸리고, 책의 내용을 요약했음에도 불구하고 며칠만에 다시 보는거여서 오래 걸렸다.</p>
+<p>많이 헤맨 덕분에, <code>docker container ls</code>, <code>docker container rm</code>, <code>docker container exec</code>, <code>docker container run</code>은 정말 많이 사용해서 다행이다.</p>
+<hr>
+<p>참고 자료: Docker In A Month of Lunches (Manning, 2020)</p>
+<hr>
+<p>추가로 읽을 것: <a target="_blank" rel="noopener" href="https://medium.com/@darkrasid/docker%EC%99%80-vm-d95d60e56fdd">Docker와 VM</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>[1 Month Docker] 1. Docker의 기본 컨셉과 Hello World</p><p><a href="https://jsqna.com/docker-diamol-1-hello-world/">https://jsqna.com/docker-diamol-1-hello-world/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Seongbin Kim</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>21-01-02</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>21-01-19</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Docker/">Docker</a><a class="link-muted mr-2" rel="tag" href="/tags/1-Month-Docker/">1 Month Docker</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/ci-1-github-actions-nodejs/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">10분 만에 기반 지식 없이 Node.js를 위한 Github Actions CI 구축하기</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/ndp-2-module/"><span class="level-item">2장 (2/3): Node.js의 모듈 시스템</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jsqna.com/docker-diamol-1-hello-world/';
+            this.page.identifier = 'docker-diamol-1-hello-world/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'jsqna' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">9</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-19T07:20:00.000Z">21-01-19</time></p><p class="title"><a href="/ejs-1-why-express/">Express를 사용해야 할 이유 (1)</a></p><p class="categories"><a href="/categories/ExpressJs/">ExpressJs</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T10:55:00.000Z">21-01-15</time></p><p class="title"><a href="/js-generator/">Javascript의 Generator</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T10:54:00.000Z">21-01-15</time></p><p class="title"><a href="/js-promise-all/">Promise.all은 Parallel로 실행되는가?</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T09:05:00.000Z">21-01-15</time></p><p class="title"><a href="/js-event-loop-browser-vs-node/">이벤트 루프는 환경마다 다를까?</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T06:45:00.000Z">21-01-15</time></p><p class="title"><a href="/js-license/">Javascript의 라이센스</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script>
+      var sc_project=12454169;
+      var sc_invisible=1;
+      var sc_security="6948ab3c";
+      var sc_https=1;
+      var sc_remove_link=1;</script><script src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><img class="statcounter" src="https://c.statcounter.com/12454169/0/6948ab3c/1/" alt="real time web analytics"></div></noscript><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container" id="algolia-input"></div><div id="algolia-poweredby" style="display:flex;margin:0 .5em 0 1em;align-items:center;line-height:0"></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div><div class="searchbox-footer"></div></div></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.0.3/dist/algoliasearch-lite.umd.js" crossorigin="anonymous" defer></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.3.1/dist/instantsearch.production.min.js" crossorigin="anonymous" defer></script><script src="/js/algolia.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadAlgolia({"applicationId":"O4LVCS99Q2","apiKey":"a5b0a2c99ffc3e96272db5353f20f4e3","indexName":"JSQnA"}, {"hint":"입력 하세요...","no_result":"에 대한 결과 없음","untitled":"(제목 없음)","empty_preview":"(미리보기 없음)"});
+        });</script></body></html>

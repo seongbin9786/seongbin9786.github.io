@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>태그: ExpressJs - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="JS QnA"><meta property="og:url" content="https://jsqna.com/"><meta property="og:site_name" content="JS QnA"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="javascript"><meta property="article:tag" content="typescript"><meta property="article:tag" content="nodejs"><meta property="article:tag" content="reactjs"><meta property="article:tag" content="docker"><meta property="article:tag" content="kubernetes"><meta property="article:tag" content="ci"><meta property="article:tag" content="cd"><meta property="article:tag" content="jenkins"><meta property="article:tag" content="microservies"><meta property="article:tag" content="msa"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"author":{"@type":"Person","name":"Seongbin Kim"},"description":null}</script><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">태그</a></li><li class="is-active"><a href="#" aria-current="page">ExpressJs</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-01-19T07:20:00.000Z" title="2021-01-19T07:20:00.000Z">21-01-19</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-01-19T07:43:22.500Z" title="2021-01-19T07:43:22.500Z">21-01-19</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/ExpressJs/">ExpressJs</a></span><span class="level-item">21분안에 읽기 (약 3193 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/ejs-1-why-express/">Express를 사용해야 할 이유 (1)</a></h1><div class="content"><p>잠시나마 사용해본 Express는 내게 React 같았다. 무엇이든 할 수 있어 보였으나 직접 하기에는 매우 불편하고, 그러다보니 REST API를 작성할 때 이런 것까지 해야 돼? 혹은 이런 기능이 없어서 불편하네 등이 많았는데 이번에 알아보려고 한다. 얼마나 많이 Express를 사용하며, 왜 Express를 사용하는지 팩트 위주로 체크해봤다.</p>
+<hr>
+<h3 id="1-Node와-Express의-장점을-헷갈리면-안-된다"><a href="#1-Node와-Express의-장점을-헷갈리면-안-된다" class="headerlink" title="1. Node와 Express의 장점을 헷갈리면 안 된다."></a><strong>1. Node와 Express의 장점을 헷갈리면 안 된다.</strong></h3><p>대부분의 웹사이트에서 소개하는 Express의 장점들은 <a target="_blank" rel="noopener" href="https://tsh.io/blog/why-use-nodejs/">Javascript, Node.js의 장점</a>들이었다. 많은 글을 읽어보아도 Express의 장점을 소개하는 글은 많이 없었고 대부분 Node.js의 장점을 소개하고 있었다. </p>
+<p>Express가 Node 기반인 게 큰 장점이라는 걸까… 그래서 Node.js와 같은 목적으로 생성된 프레임워크/런타임을 조사해보았다.</p>
+<hr>
+<h3 id="2-Reactor-Pattern을-구현한-프레임워크-런타임"><a href="#2-Reactor-Pattern을-구현한-프레임워크-런타임" class="headerlink" title="2. Reactor Pattern을 구현한 프레임워크/런타임"></a><strong>2. Reactor Pattern을 구현한 프레임워크/런타임</strong></h3><p><strong>A. 역시 Node.js만 있는 것은 아니었다.</strong> Javascript를 깊게 배우고 생태계를 옮겨 탈 바에 기존에 사용하던 언어로 작업하는 게 현실적이긴하다.</p>
+<table>
+<thead>
+<tr>
+<th>Lang</th>
+<th>Sync Framework</th>
+<th>Async Framework</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java</td>
+<td>Spring Web MVC</td>
+<td><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html">Spring WebFlux</a> (<a href="https://jsqna.com/ndp-1-reactor-pattern/">Reactor Pattern</a>), <a target="_blank" rel="noopener" href="https://vertx.io/">Vert.x (JVM 기반)</a></td>
+</tr>
+<tr>
+<td>Python</td>
+<td>Flask, Django</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/tiangolo/fastapi">FastAPI</a>, <a target="_blank" rel="noopener" href="https://github.com/tornadoweb/tornado">Tornado</a>, <a target="_blank" rel="noopener" href="https://github.com/channelcat/sanic/blob/master/docs/sanic/getting_started.rst">Sanic</a>, … (꽤 많다.)</td>
+</tr>
+<tr>
+<td>Javascript</td>
+<td>-</td>
+<td>*</td>
+</tr>
+</tbody></table>
+<p>다른 언어에 대해선 찾아보지 않았지만 Java, Python이 점유율이 큰 언어들이므로 충분하다고 생각한다. 벤치마크를 찾아보진 않았지만 같은 패턴을 기반으로 제작됐기 때문에 실제 서비스로 구현했을 땐 성능 면에서도 비슷할 것으로 예상된다.</p>
+<p>다만 Node.js의 장점이라면, 선천적으로 비동기 API가 장려되어왔기 때문에 비동기 API로 작성된 라이브러리 활용 면에서 낫지 않을까 생각한다.</p>
+<p><img src="https://blog.kakaocdn.net/dn/cvOos4/btqBAVbGq1W/SRBlIXlePKbV9U2k13Kcyk/img.png" alt="Spring Web Flux 구조 - Node.js EventLoop과 유사"></p>
+<p>출처: </p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://happyer16.tistory.com/entry/%EB%8C%80%EC%9A%A9%EB%9F%89-%ED%8A%B8%EB%9E%98%ED%94%BD%EC%9D%84-%EA%B0%90%EB%8B%B9%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-Spring-WebFlux-%EB%8F%84%EC%9E%85">대용량 트래픽을 감당하기 위한 Spring Webflux 도입</a>, </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://devahea.github.io/2019/04/21/Spring-WebFlux%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%A0%81%EC%9D%80-%EB%A6%AC%EC%86%8C%EC%8A%A4%EB%A1%9C-%EB%A7%8E%EC%9D%80-%ED%8A%B8%EB%9E%98%ED%94%BD%EC%9D%84-%EA%B0%90%EB%8B%B9%ED%95%A0%EA%B9%8C/">Spring Webflux는 어떻게 적은 리소스로 많은 트래픽을 감당할까</a></p>
+</li>
+</ul>
+<hr>
+<h3 id="3-Node-js-백엔드-프레임워크-간의-점유율-만족도-비교"><a href="#3-Node-js-백엔드-프레임워크-간의-점유율-만족도-비교" class="headerlink" title="3. Node.js 백엔드 프레임워크 간의 점유율/만족도 비교"></a><strong>3. Node.js 백엔드 프레임워크 간의 점유율/만족도 비교</strong></h3><p>제대로 비교하기 전에 통계 자료부터 확인하자.</p>
+<ul>
+<li>참고로 <a target="_blank" rel="noopener" href="https://medium.com/weekly-webtips/next-js-on-the-server-side-notes-to-self-e2170dc331ff">Next.js는 SSR 용 백엔드(SSR, Code Splitting 자동)</a>라고 생각하면 된다.</li>
+</ul>
+<hr>
+<p><strong>점유율 요약 (아래 그림):</strong></p>
+<ul>
+<li>Express의 점유율이 압도적이다.</li>
+<li>Koa, Hapi 라는 네임드의 점유율이 꽤 낮다.</li>
+<li>서비스 개발에 가장 유리할 거라고 생각했던 Nest.js의 점유율이 13%밖에 안돼서 의문이다.</li>
+</ul>
+<p><img src="/images/ejs-1/express-1.png" alt="2020 점유율 순위"></p>
+<table>
+<thead>
+<tr>
+<th>Hapi</th>
+<th>Koa</th>
+<th>Nest</th>
+<th>Express</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/images/ejs-1/hapi.png"></td>
+<td><img src="/images/ejs-1/koa.png"></td>
+<td><img src="/images/ejs-1/nest.png"></td>
+<td><img src="/images/ejs-1/express.png"></td>
+</tr>
+</tbody></table>
+<p>물론 Express를 기반으로 하는 다른 프레임워크 등이 어느 정도 반영됐을 것이긴 하다. Nest도 처음에는 Express 기반이었으니까. 그래도 다운로드 수의 큰 차이를 보면 나머지 프레임워크의 시장성이 의심되긴 한다.</p>
+<hr>
+<p><strong>만족도 비교 (아래 그림):</strong></p>
+<ul>
+<li>Express는 점유율에 이어 만족도도 최상위권이다.</li>
+<li>Nest.js가 5% point 정도의 차이가 있지만 준수한 편이다. </li>
+<li>Koa의 만족도가 76%인 점인 이유는 장점이었던 동기식 코딩 방식인 async-await이 표준화됐기 때문임으로 보인다.</li>
+<li>Hapi는 만족도가 매우 낮은 것으로 보아 사용할 수 없겠다는 생각이 들었다. (추후 조사를 해봐야겠다.)</li>
+</ul>
+<p><img src="/images/ejs-1/express-2.png" alt="2020 만족도 순위"></p>
+<p>출처: <a target="_blank" rel="noopener" href="https://2020.stateofjs.com/ko-KR/technologies/back-end-frameworks/">2020 State Of JS (한국어 번역)</a></p>
+<hr>
+<h3 id="4-왜-이렇게-Express를-많이-쓰는-걸까"><a href="#4-왜-이렇게-Express를-많이-쓰는-걸까" class="headerlink" title="4. 왜 이렇게 Express를 많이 쓰는 걸까?"></a><strong>4. 왜 이렇게 Express를 많이 쓰는 걸까?</strong></h3><blockquote>
+<p>정말 Express가 좋은걸까? </p>
+<p>다른 언어의 프레임워크를 비교해봤을 때 솔직히 좋다고 하진 못 할것 같다.</p>
+</blockquote>
+<hr>
+<h4 id="1-단순함-0"><a href="#1-단순함-0" class="headerlink" title="1. 단순함 (+0)"></a><strong>1. 단순함 (+0)</strong></h4><p>정말 많은 블로그에서 Express의 최장점을 단순함으로 꼽고 있었는데 장점보다는 목적에 가까운 것이라 생각한다. 목표에 따라 단순함은 장점이 될 수도, 단점이 될 수도 있기 때문이다. 단순함을 장점으로 꼽는 경우 둘 중 하나이다. </p>
+<ul>
+<li>Rich Framework를 감당할 만큼 숙련된 개발자로 채우기 어려운 조직이거나</li>
+<li>애초에 큰 규모의 서비스를 작성하기 위해 Express를 사용하지 않거나</li>
+</ul>
+<p>만약 서비스 개발을 위해 Express를 사용한다면 단순함은 직접적인 단점이 된다. </p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/danielfsousa/express-rest-boilerplate">기본적인 의존성만 담은 Boilerplate(1.4k stars)</a>만 보더라도 같이 깔아야 할 라이브러리들이 많아 학습 곡선이 가팔라진다.</p>
+</li>
+<li><p>처음 입문하는 경우 미들웨어들을 직접 찾는 추가적인 일을 하게 된다. (한 프레임워크 내에서 찾는 것과 대조적.)</p>
+</li>
+<li><p>Rich Framework 들에 비해 설계를 너무 근본적인 것들부터 해야 해 오히려 설계 측면에선 난도가 높다. (DI/IOC가 없고 여러 라이브러리를 비교 분석 후 사용해야 함.)</p>
+</li>
+</ul>
+<p>다만 적절한 Boilerplate를 찾으면 이 문제가 어느 정도 해소된다는 점과 이후 단락에서 소개할 내용들을 통해 단순함의 단점을 상쇄할 수 있다.</p>
+<p>Node.js는 출시 후 아직까지도 작은 서비스를 만드는 데 적합하다는, 프로토 타이핑 위주라는 인식이 남아 있는 것 같고, 그런 용도로 채택하여 단순함이 종종 장점이 되는 것 같기도 하다.</p>
+<hr>
+<h4 id="2-Express-Middleware-0"><a href="#2-Express-Middleware-0" class="headerlink" title="2. Express Middleware (+0)"></a><strong>2. Express Middleware (+0)</strong></h4><p>어떤 언어, 프레임워크로 웹 개발을 하더라도 Express에 미들웨어에 해당하는 계층에서 확장성을 가져가는 것은 기본이지 특별한 기능은 아니다. 또한 Express에서 제공하던 자체 Middleware들은 모두 <a target="_blank" rel="noopener" href="https://github.com/senchalabs/connect#middleware">Connect 미들웨어 라이브러리</a>로 <a target="_blank" rel="noopener" href="http://expressjs.com/en/guide/migrating-4.html#core-changes">옮겨갔다</a>. <a target="_blank" rel="noopener" href="https://nextjs.org/docs/api-routes/api-middlewares#connectexpress-middleware-support">Next.js에서는 이 미들웨어들을 지원하는데</a>, 그럼 다른 프레임워크에서도 의도하기만 하면 재사용 할 수 있는 셈이다. (의존성이 req, res, next 인자 밖에 없으니.)</p>
+<hr>
+<h4 id="3-Community-3"><a href="#3-Community-3" class="headerlink" title="3. Community (+3)"></a><strong>3. Community (+3)</strong></h4><p>Express는 꽤 많은 사용자 풀을 보유하고 있다. 이미 사용자가 많아 검색을 통한 문제 해결이 비교적 원활하다.</p>
+<p>아래는 <a target="_blank" rel="noopener" href="https://insights.stackoverflow.com/trends?tags=express,nestjs,next.js">StackOverFlow 트렌드</a>인데 koa(js), hapi(js)는 태그로 잡히지도 않아서 비교가 불가능했다. 이는 생태계 조성이 거의 전무하다는 뜻인데 koa나 hapi는 출시된 지 시간이 지났음에도 이정도이며 특히 Hapi는 정말 작은 사용자 풀을 보여준다(사용하지 마세요).</p>
+<p><img src="/images/ejs-1/trends-sto.png" alt="StackOverFlow Trends: Express vs Nest vs Next"></p>
+<hr>
+<h4 id="4-Async-await을-workaround로-쓸-수-있다-1"><a href="#4-Async-await을-workaround로-쓸-수-있다-1" class="headerlink" title="4. Async-await을 workaround로 쓸 수 있다. (+1)"></a><strong>4. Async-await을 workaround로 쓸 수 있다. (+1)</strong></h4><p>Express v5 부터는 Response Handler 및 Middleware에서 async/await을 사용할 수 있지만 아직 Release 되지 않은 관계로 사용할 수는 없다.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/expressjs/express/issues/4256#issuecomment-619616708">Express QnA 이슈의 답변</a>이다.</p>
+<p>Q. How to use async/await in express 5?</p>
+<p>A: There is one <u>main difference</u> between v4 and v5 when it comes to <u>async/await and promises in general</u>. In v5, if you return a promise from a response handler (or middleware), if that promise rejects and is not handled elsewhere, then Express will handle the error. It handles the rejection by passing the rejection reason to <code>next</code> for you.</p>
+</blockquote>
+<p>v4에서도 async-await을 쓸 수 있는데, 아주 간단한 미들웨어 <a target="_blank" rel="noopener" href="https://github.com/Abazhenov/express-async-handler">express-async-handler</a>로 한 번 감싸주면 된다. (원리는 <a target="_blank" rel="noopener" href="https://medium.com/@changjoopark/express-%EB%9D%BC%EC%9A%B0%ED%8A%B8%EC%97%90%EC%84%9C-async-await%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%A0%A4%EB%A9%B4-7e8ffe0fcc84">이 설명</a> 참고) (같은 원리로 Promise도 처리 가능)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// find a user by id</span></span><br><span class="line">router.get(</span><br><span class="line">  <span class="string">&#x27;/:id&#x27;</span>,</span><br><span class="line">  asyncHandler(<span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (req.user.id === req.params.id) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.status(<span class="number">403</span>).send(FORBIDDEN);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> UserRepository.findUserById(req.params.id);</span><br><span class="line">    <span class="keyword">if</span> (!user) <span class="keyword">return</span> res.status(<span class="number">404</span>).send(NOT_FOUND);</span><br><span class="line"></span><br><span class="line">    res.json(user);</span><br><span class="line">  &#125;),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="5-Koa나-Express나-둘-다-개발은-하지-않는다-0"><a href="#5-Koa나-Express나-둘-다-개발은-하지-않는다-0" class="headerlink" title="5. Koa나 Express나 둘 다 개발은 하지 않는다. (+0)"></a><strong>5. Koa나 Express나 둘 다 개발은 하지 않는다. (+0)</strong></h4><p>Koa나 Express나 발전을 멈춘지 좀 됐다.</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/koajs/koa/issues/1114">Koa의 Roadmap 3.0</a>을 보면 현재 모습이 Koa의 완성형이라고 생각할 수 있다.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/koajs/koa/tree/7ae9c3e1099688ada21411a350d2b50dae629388">17년도 이후로 유지보수</a>가 대부분 Documentation에 치중되어 있다.</p>
+</li>
+</ul>
+<p>KoaJS는 <a target="_blank" rel="noopener" href="https://github.com/koajs/koa/tree/8ee8abcc3268189c3f44abfb64d42903a87c4d5e">2013년에 시작</a>해 제너레이터 기반으로 미들웨어를 쉽게 작성하기 위해 나온 프레임워크인데, async-await 표준이 2017년 초부터 Node.js에서 공식적으로 지원되면서 그 의미가 퇴색되지 않았나 생각이 든다.</p>
+<p>Express 역시 Documentation 위주의 유지보수, v5를 6-7년 째 안 내고 있긴 하다. (14, 15년도 쯤까지만 일한듯)</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/expressjs/express/issues/2844">Is express dying?</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/expressjs/express/pull/2237">Release v5</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/pillarjs/router">Router 모듈</a> (Express가 라우팅 관련 책임을 이 모듈로 넘긴 듯하다.) (얘도 유지보수가 죽었고.)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/blog/announcements/foundation-express-news/">Node.js Foundation to Add Express to its Incubator Program</a> 16년 초에 Express 소유권이 넘어갔다고 한다.(인과관계는 잘x)</p>
+</li>
+</ul>
+<hr>
+<h3 id="5-서비스-개발-측면에선-NestJs가-더-낫지-않을까-추후-보강-예정"><a href="#5-서비스-개발-측면에선-NestJs가-더-낫지-않을까-추후-보강-예정" class="headerlink" title="5. 서비스 개발 측면에선 NestJs가 더 낫지 않을까? (추후 보강 예정)"></a><strong>5. 서비스 개발 측면에선 NestJs가 더 낫지 않을까? (추후 보강 예정)</strong></h3><p>Express, Koa는 현재 사실상 유지보수가 되고 있지 않다. 프로젝트에서 돈을 벌지 못하기 때문인 것으로 보이는데, 기업 스폰서가 없으며 프레임워크도 간단해 기술 지원이 불가능해 수익 모델이 없다. (Hapi는 Walmart에서 사용 중이긴 하지만 너무 마이너하다. 왜 인기가 없을까?)</p>
+<p>NestJS는 구조가 Angular의 영향을 받았다고 돼있지만 Spring과 유사한 구조와 개발자 경험을 제공한다고 생각하며, Spring은 그 기능과 복잡성을 통해 기술 지원으로 돈을 벌고 있기 때문에 NestJS가 이 모델을 구현한다면 긴 시간 유지보수를 해나갈 수 있을 것 같다.</p>
+<hr>
+<p>정확히 무슨 벤치마크를 했는진 모르겠지만 성능 측면에서 NestJs-Fasitfy[현재 버전]가 Express보다 낫다고 한다. (<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/47733390/nestjs-vs-plain-express-performance">출처</a>)</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Req/sec</th>
+<th>Trans/sec</th>
+<th>Req/sec DIFF</th>
+<th>Trans/sec DIFF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nest-Express</td>
+<td>15370</td>
+<td>3.17MB</td>
+<td>+4.38%</td>
+<td>+4.23%</td>
+</tr>
+<tr>
+<td>Nest-Fastify</td>
+<td>30001</td>
+<td>4.38MB</td>
+<td>+2.20%</td>
+<td>+2.23%</td>
+</tr>
+<tr>
+<td>Express</td>
+<td>17208</td>
+<td>3.53MB</td>
+<td>+8.38%</td>
+<td>+8.31%</td>
+</tr>
+<tr>
+<td>Fastify</td>
+<td>33578</td>
+<td>4.87MB</td>
+<td>+6.55%</td>
+<td>+6.53%</td>
+</tr>
+</tbody></table>
+<p>NestJS에 대해선 추후 더 조사하려고 한다.</p>
+<hr>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a><strong>TODO</strong></h3><h4 id="1-NestJS"><a href="#1-NestJS" class="headerlink" title="1. NestJS"></a><strong>1. NestJS</strong></h4><p>NestJS는 다루는 양이 방대하기도 하고 앞의 리서치에서 시간을 너무 많이 사용해서 따로 시간을 내서 리서치하진 못 해서 다음 기회에 꼭 하도록 한다.</p>
+<h4 id="2-Fasify"><a href="#2-Fasify" class="headerlink" title="2. Fasify"></a><strong>2. Fasify</strong></h4><p>한 번 조사해봐야 할 것 같다. async-await도 지원하며 제대로 관리되고 있는 것 같다.</p>
+<p>아래는 <a target="_blank" rel="noopener" href="https://github.com/fastify/fastify">README에 게시된 벤치마크</a>인데 성능도 역시 좋고.</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Version</th>
+<th>Router?</th>
+<th>Requests/sec</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Express</td>
+<td>4.17.1</td>
+<td>✓</td>
+<td>15,978</td>
+</tr>
+<tr>
+<td>hapi</td>
+<td>19.1.0</td>
+<td>✓</td>
+<td>45,815</td>
+</tr>
+<tr>
+<td>Restify</td>
+<td>8.5.1</td>
+<td>✓</td>
+<td>49,279</td>
+</tr>
+<tr>
+<td>Koa</td>
+<td>2.13.0</td>
+<td>✗</td>
+<td>54,848</td>
+</tr>
+<tr>
+<td><strong>Fastify</strong></td>
+<td><strong>3.0.0</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>78,956</strong></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>http.Server</code></td>
+<td>12.18.2</td>
+<td>✗</td>
+<td>70,380</td>
+</tr>
+</tbody></table>
+<h4 id="3-HapiJS"><a href="#3-HapiJS" class="headerlink" title="3. HapiJS"></a><strong>3. HapiJS</strong></h4><p>Hapi도 개발이 계속 진행 중이고 Nest처럼 Rich한 Framework를 목표로 하는 것 같고, Walmart에서 실제로 사용하면서 주도적으로 개발하다가 작년 중순부터 <a target="_blank" rel="noopener" href="https://github.com/hapijs/hapi/issues/4113">Community-driven으로 간다고 한다</a>. 성장 가능성이 꽤 있는 것 같아서 시간이 나면 조사하면 좋을 것 같다. Facebook이 React를 만들어 프론트엔드 생태계를 많이 바꿔낸 것처럼.</p>
+<h4 id="4-Express-In-Action-2016"><a href="#4-Express-In-Action-2016" class="headerlink" title="4. Express In Action (2016)"></a><strong>4. Express In Action (2016)</strong></h4><p>이 책을 좀 더 읽어보고 Express의 가치를 발견하다면 정말 좋을 것 같다.</p>
+<h4 id="5-기타"><a href="#5-기타" class="headerlink" title="5. 기타"></a><strong>5. 기타</strong></h4><p>Promise, Async-await이 성능이 CPS 패턴에 비해 느리다는 의견이 종종 나왔는데 왜 그런지 확인해보기</p>
+<p>D2에서 Node.js는 Socket.IO 때문에 떴다고 하던데 정말인지 확인해보기</p>
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">9</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-19T07:20:00.000Z">21-01-19</time></p><p class="title"><a href="/ejs-1-why-express/">Express를 사용해야 할 이유 (1)</a></p><p class="categories"><a href="/categories/ExpressJs/">ExpressJs</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T10:55:00.000Z">21-01-15</time></p><p class="title"><a href="/js-generator/">Javascript의 Generator</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T10:54:00.000Z">21-01-15</time></p><p class="title"><a href="/js-promise-all/">Promise.all은 Parallel로 실행되는가?</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T09:05:00.000Z">21-01-15</time></p><p class="title"><a href="/js-event-loop-browser-vs-node/">이벤트 루프는 환경마다 다를까?</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T06:45:00.000Z">21-01-15</time></p><p class="title"><a href="/js-license/">Javascript의 라이센스</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script>
+      var sc_project=12454169;
+      var sc_invisible=1;
+      var sc_security="6948ab3c";
+      var sc_https=1;
+      var sc_remove_link=1;</script><script src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><img class="statcounter" src="https://c.statcounter.com/12454169/0/6948ab3c/1/" alt="real time web analytics"></div></noscript><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container" id="algolia-input"></div><div id="algolia-poweredby" style="display:flex;margin:0 .5em 0 1em;align-items:center;line-height:0"></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div><div class="searchbox-footer"></div></div></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.0.3/dist/algoliasearch-lite.umd.js" crossorigin="anonymous" defer></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.3.1/dist/instantsearch.production.min.js" crossorigin="anonymous" defer></script><script src="/js/algolia.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadAlgolia({"applicationId":"O4LVCS99Q2","apiKey":"a5b0a2c99ffc3e96272db5353f20f4e3","indexName":"JSQnA"}, {"hint":"입력 하세요...","no_result":"에 대한 결과 없음","untitled":"(제목 없음)","empty_preview":"(미리보기 없음)"});
+        });</script></body></html>
