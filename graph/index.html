@@ -16,20 +16,40 @@
   <div id="3d-graph"></div>
 
   <script>
+    const distance = 400;
+
     const Graph = ForceGraph3D()(
       document.getElementById('3d-graph'),
     )
-      .jsonUrl('/graph/miserables.json')
+      .jsonUrl('/miserables.json')
       .nodeAutoColorBy('group')
       .nodeThreeObject((node) => {
         const sprite = new SpriteText(node.text);
         sprite.material.depthWrite = false; // make sprite background transparent
         sprite.color = node.color;
-        sprite.textHeight = node.size ? 16 : 8;
+        sprite.textHeight = node.size
+          ? node.size * 4
+          : 8;
         return sprite;
+      })
+      .enableNodeDrag(false)
+      .enableNavigationControls(false)
+      .showNavInfo(false)
+      .cameraPosition({
+        y: distance,
       });
 
     // Spread nodes a little wider
     Graph.d3Force('charge').strength(-120);
+
+    // camera orbit
+    let angle = 0;
+    setInterval(() => {
+      Graph.cameraPosition({
+        x: distance * Math.sin(angle),
+        z: distance * Math.cos(angle),
+      });
+      angle += Math.PI / 300;
+    }, 30);
   </script>
 </body>
