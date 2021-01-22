@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>NestJS를 사용해야 할 이유 - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Express를 사용해야 할 이유 (1)을 쓰면서 NestJS는 굉장히 매력적인 대상으로 다가왔다. 이번 글에서는 NestJS를 사용해야 할 이유를 조금 더 자세히 정리하고, NestJS를 간략히 알아본다.  NestJS를 사용해야 할 이유NestJs만의 장점이 뭐가 있을까? 생각보다 좀 있었는데, 아무래도 Rich Framework의 특징을 많이 갖고 있"><meta property="og:type" content="blog"><meta property="og:title" content="NestJS를 사용해야 할 이유"><meta property="og:url" content="https://jsqna.com/jsb-1-nestjs/"><meta property="og:site_name" content="JS QnA"><meta property="og:description" content="Express를 사용해야 할 이유 (1)을 쓰면서 NestJS는 굉장히 매력적인 대상으로 다가왔다. 이번 글에서는 NestJS를 사용해야 할 이유를 조금 더 자세히 정리하고, NestJS를 간략히 알아본다.  NestJS를 사용해야 할 이유NestJs만의 장점이 뭐가 있을까? 생각보다 좀 있었는데, 아무래도 Rich Framework의 특징을 많이 갖고 있"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://docs.nestjs.com/assets/Controllers_1.png"><meta property="og:image" content="https://docs.nestjs.com/assets/Components_1.png"><meta property="og:image" content="https://docs.nestjs.com/assets/Modules_1.png"><meta property="article:published_time" content="2021-01-22T10:40:00.000Z"><meta property="article:modified_time" content="2021-01-22T10:48:13.890Z"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="NestJs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://docs.nestjs.com/assets/Controllers_1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com/jsb-1-nestjs/"},"headline":"JS QnA","image":["https://docs.nestjs.com/assets/Controllers_1.png","https://docs.nestjs.com/assets/Components_1.png","https://docs.nestjs.com/assets/Modules_1.png"],"datePublished":"2021-01-22T10:40:00.000Z","dateModified":"2021-01-22T10:48:13.890Z","author":{"@type":"Person","name":"Seongbin Kim"},"description":"Express를 사용해야 할 이유 (1)을 쓰면서 NestJS는 굉장히 매력적인 대상으로 다가왔다. 이번 글에서는 NestJS를 사용해야 할 이유를 조금 더 자세히 정리하고, NestJS를 간략히 알아본다.  NestJS를 사용해야 할 이유NestJs만의 장점이 뭐가 있을까? 생각보다 좀 있었는데, 아무래도 Rich Framework의 특징을 많이 갖고 있"}</script><link rel="canonical" href="https://jsqna.com/jsb-1-nestjs/"><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-01-22T10:40:00.000Z" title="2021-01-22T10:40:00.000Z">21-01-22</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-01-22T10:48:13.890Z" title="2021-01-22T10:48:13.890Z">21-01-22</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/NestJs/">NestJs</a></span><span class="level-item">10분안에 읽기 (약 1542 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">NestJS를 사용해야 할 이유</h1><div class="content"><p><a href="https://jsqna.com/ejs-1-why-express/">Express를 사용해야 할 이유 (1)</a>을 쓰면서 NestJS는 굉장히 매력적인 대상으로 다가왔다. 이번 글에서는 NestJS를 사용해야 할 이유를 조금 더 자세히 정리하고, NestJS를 간략히 알아본다.</p>
+<hr>
+<h3 id="NestJS를-사용해야-할-이유"><a href="#NestJS를-사용해야-할-이유" class="headerlink" title="NestJS를 사용해야 할 이유"></a><strong>NestJS를 사용해야 할 이유</strong></h3><p>NestJs만의 장점이 뭐가 있을까? 생각보다 좀 있었는데, 아무래도 Rich Framework의 특징을 많이 갖고 있다.</p>
+<table>
+<thead>
+<tr>
+<th>장점</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLI</td>
+<td>생산성에 도움이 되는 유틸을 제공한다고 한다.</td>
+</tr>
+<tr>
+<td>문서화</td>
+<td>자세하고 유지보수가 잘 되는 문서를 갖고 있다고 한다. (타 프레임워크에 비해 기능이 훨씬 많은데도)</td>
+</tr>
+<tr>
+<td>활성화된 개발 팀</td>
+<td><a href="https://jsqna.com/ejs-1-why-express/">이전 글</a>에서 알아본 바로 이는 굉장히 특장점이다. (다른 언어에 비해 백엔드가 많이 약하다고 생각함)</td>
+</tr>
+<tr>
+<td>Nest 전용 모듈</td>
+<td>Spring처럼 타 라이브러리를 쉽게 사용할 수 있게 전용 모듈을 개발했다. TypeORM, Mongoose, GraphQL, Logging, Validation, Caching, WebSockets 등의 모듈이 있다고 한다.</td>
+</tr>
+<tr>
+<td>MSA를 염두에 둔 설계</td>
+<td>(이건 내가 MSA에 대한 이해가 적어서 얼마나 효과적일지 모르겠음.)</td>
+</tr>
+<tr>
+<td>Typescript 채택</td>
+<td>(Typescript 경험이 일천해 얼마나 효과적일지 모르겠음.)</td>
+</tr>
+<tr>
+<td>테스트 용이성</td>
+<td>프레임워크 핵심 가치에 테스트 용이성이 있고 프레임워크에서 설계를 <u>제공</u>하므로, 다른 프레임워크에 독자적인 설계를 했을 때보다 테스트가 용이할 것으로 <u>기대됨</u>.</td>
+</tr>
+</tbody></table>
+<h4 id="NestJS를-사용하는-기업"><a href="#NestJS를-사용하는-기업" class="headerlink" title="NestJS를 사용하는 기업"></a><strong>NestJS를 사용하는 기업</strong></h4><p>사용하는 기업 목록 중 SW적으로 큰 기업이 없는데 무슨 이유일지 모르겠다. 분명 시장의 선택은 합리적일텐데 정말 선택받지 못한거라면 중요한 문제가 있을 거라는 합리적인 의심을 해볼 만하다.</p>
+<hr>
+<h3 id="NestJS의-핵심"><a href="#NestJS의-핵심" class="headerlink" title="NestJS의 핵심"></a><strong>NestJS의 핵심</strong></h3><hr>
+<h4 id="패러다임"><a href="#패러다임" class="headerlink" title="패러다임"></a><strong>패러다임</strong></h4><p>Typescript를 <u>지원</u>하면서 OOP, FP, FRP(Functional Reactive) 요소를 조합한 백엔드 프레임워크이다.</p>
+<blockquote>
+<p>Typescript 사용은 강제가 아니다.</p>
+</blockquote>
+<p>Express, Fastify 를 기반해 개발됐고, NestJs가 윗단으로 추상화 계층을 제공하지만 바로 접근할 수도 있다.</p>
+<p>NestJs는 Node.js HTTP 프레임워크 추상화 계층을 구현해놓았기 때문에, Express, Fastify 이외에도 Adapter 패턴을 통해 인터페이스 구현체만 제공한다면 어떤 기술 위에서도 작동할 수 있다고 한다. 아마 Fastify로 이주할 때 개발해 놓은듯하다.</p>
+<blockquote>
+<p><code>@nestjs/platform-expres</code>, <code>@nestjs/platform-fastify</code> 로 패키지가 분리돼있으니 참고해보면 재밌을 것 같다.</p>
+</blockquote>
+<p>다만 NestJs에서 Express 생태계가 필요할 것 같지도 않고 Fastify가 훨씬 빠른데 굳이 Express를 기본값으로 해놓은 이유는 모르겠다.</p>
+<p>NestJs는 Typescript를 사용하지 않는다면 Babel이 필요하다고 하며 Node.js 10.13버전 미만으로는 지원하지 않는다.</p>
+<blockquote>
+<p>Typescript가 정확히 어떤 Javascript 버전까지 지원하는지 확인할 수 없었는데 조만간 Typescript를 학습하면서 정리해야겠다.</p>
+</blockquote>
+<hr>
+<h4 id="목표"><a href="#목표" class="headerlink" title="목표"></a><strong>목표</strong></h4><p>프론트 3대 프레임워크 덕분에 개발자 생산성이 향상됐고 빠르고 테스트 가능하고 확장성있는 프론트엔드 개발이 가능해졌는데, 그 외 좋은 라이브러리들이 많지만 애플리케이션 구조, 설계 측면의 문제를 해결하는 프로젝트는 없었다. (이건 Javascript 계열의 특징이라고 생각한다. 아마도 대규모로 개발하는 제품에 Javascript를 쓰지 않기 때문인 것으로 보인다. 요즘은 언어가 많이 좋아졌는데도 말이다.)</p>
+<p>NestJs는 애플리케이션 <u>아키텍처를 제공</u>한다(즉 개발자가 결정하는 게 아님). 테스트 가능하고, 확장성 있고, 느슨히 결합되고, 쉽게 유지보수 가능한 설계이다. Angular에서 영감을 받았다. (Angular는 강제성 있는 구조를 제공한다. React는 그 반대이고.)</p>
+<hr>
+<h3 id="NestJS-Docs-Intro-요약"><a href="#NestJS-Docs-Intro-요약" class="headerlink" title="NestJS Docs Intro 요약"></a><strong>NestJS Docs Intro 요약</strong></h3><p>문서의 내용을 요약했다.</p>
+<h4 id="프로젝트-제너레이터"><a href="#프로젝트-제너레이터" class="headerlink" title="프로젝트 제너레이터"></a><strong>프로젝트 제너레이터</strong></h4><p><code>nest new &#123;project_name&#125;</code> 을 입력하면 프로젝트 폴더가 생성된다. (<code>npm i -g @nestjs/cli</code>로 설치되는 CLI 유틸인듯)</p>
+<p>기본으로 생성되는 프로젝트 구조는 아래와 같다. 도메인이나 레이어 별로 폴더가 나뉘진 않는 듯하다.</p>
+<blockquote>
+<p>src</p>
+<ul>
+<li>app.controller.ts</li>
+<li>app.controller.spec.ts</li>
+<li>app.module.ts</li>
+<li>app.service.ts</li>
+<li>main.ts</li>
+</ul>
+</blockquote>
+<p>아래는 Express에서의 파일 역할 비교이다.</p>
+<table>
+<thead>
+<tr>
+<th>file</th>
+<th>NestJS</th>
+<th>Express</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Controller</td>
+<td>app.controller.ts</td>
+<td>(사용자 나름)</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>app.service.ts</td>
+<td>(사용자 나름)</td>
+</tr>
+<tr>
+<td>App</td>
+<td>app.module.ts</td>
+<td>App.js</td>
+</tr>
+<tr>
+<td>Index (진입점)</td>
+<td>main.ts</td>
+<td>index.js</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="재밌는-문서-구성"><a href="#재밌는-문서-구성" class="headerlink" title="재밌는 문서 구성"></a><strong>재밌는 문서 구성</strong></h4><p>아래는 몇 개의 하위 문서에 들어갔을 때 맨 위에 보이는 모식도 몇 개를 가져온 것이다.</p>
+<p>Spring에서도 제공하지 않는 모식도를 Nest에서 제공하는 게 재밌었는데,</p>
+<ol>
+<li>개발진들이 정말 OOP를 좋아하는 것 같다고 느껴졌고</li>
+<li>그래서 <u>오브젝트</u> 책을 보면서 같이 배우면 재밌을 것 같았고</li>
+<li>Spring에 비해 Nest는 확실히 설계를 결정해주는 느낌이 들어서 자신감이 느껴졌고</li>
+</ol>
+<p>그동안 설계를 <u>정해준</u> 프레임워크는 사용해 본적이 없었는데 받아들이기만 한다면 생산성도 꽤 좋아질 것 같다. 설계 수준 또한 오픈 소스로 개발되니 어느 정도 검증됐을 거라고 생각한다. 따라서 꽤 좋은 학습 경험을 주지 않을까 생각이 든다.</p>
+<p><img src="https://docs.nestjs.com/assets/Controllers_1.png" alt="Controller 문서의 모식도"></p>
+<p><img src="https://docs.nestjs.com/assets/Components_1.png" alt="Provider 문서의 모식도"><img src="https://docs.nestjs.com/assets/Modules_1.png" alt="Module 문서의 모식도"></p>
+<hr>
+<p>출처:</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://docs.nestjs.com/">NestJS Docs</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://selleo.com/blog/why-choose-nest-js-as-your-backend-framework">Why choose Nest.js as your backend framework? | selleo</a></p>
+</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>NestJS를 사용해야 할 이유</p><p><a href="https://jsqna.com/jsb-1-nestjs/">https://jsqna.com/jsb-1-nestjs/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Seongbin Kim</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>21-01-22</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>21-01-22</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/NestJs/">NestJs</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/ejs-1-why-express/"><span class="level-item">Express를 사용해야 할 이유 (1)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jsqna.com/jsb-1-nestjs/';
+            this.page.identifier = 'jsb-1-nestjs/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'jsqna' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">20</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">10</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/NestJs/"><span class="level-start"><span class="level-item">NestJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-22T10:40:00.000Z">21-01-22</time></p><p class="title"><a href="/jsb-1-nestjs/">NestJS를 사용해야 할 이유</a></p><p class="categories"><a href="/categories/NestJs/">NestJs</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-19T07:20:00.000Z">21-01-19</time></p><p class="title"><a href="/ejs-1-why-express/">Express를 사용해야 할 이유 (1)</a></p><p class="categories"><a href="/categories/ExpressJs/">ExpressJs</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T10:55:00.000Z">21-01-15</time></p><p class="title"><a href="/js-generator/">Javascript의 Generator</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T10:54:00.000Z">21-01-15</time></p><p class="title"><a href="/js-promise-all/">Promise.all은 Parallel로 실행되는가?</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-15T09:05:00.000Z">21-01-15</time></p><p class="title"><a href="/js-event-loop-browser-vs-node/">이벤트 루프는 환경마다 다를까?</a></p><p class="categories"><a href="/categories/Javascript/">Javascript</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">14</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NestJs/"><span class="tag">NestJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script>
+      var sc_project=12454169;
+      var sc_invisible=1;
+      var sc_security="6948ab3c";
+      var sc_https=1;
+      var sc_remove_link=1;</script><script src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><img class="statcounter" src="https://c.statcounter.com/12454169/0/6948ab3c/1/" alt="real time web analytics"></div></noscript><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container" id="algolia-input"></div><div id="algolia-poweredby" style="display:flex;margin:0 .5em 0 1em;align-items:center;line-height:0"></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div><div class="searchbox-footer"></div></div></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.0.3/dist/algoliasearch-lite.umd.js" crossorigin="anonymous" defer></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.3.1/dist/instantsearch.production.min.js" crossorigin="anonymous" defer></script><script src="/js/algolia.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadAlgolia({"applicationId":"O4LVCS99Q2","apiKey":"a5b0a2c99ffc3e96272db5353f20f4e3","indexName":"JSQnA"}, {"hint":"입력 하세요...","no_result":"에 대한 결과 없음","untitled":"(제목 없음)","empty_preview":"(미리보기 없음)"});
+        });</script></body></html>
