@@ -1,5 +1,37 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>카테고리: Linux - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="JS QnA"><meta property="og:url" content="https://jsqna.com/"><meta property="og:site_name" content="JS QnA"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="javascript"><meta property="article:tag" content="typescript"><meta property="article:tag" content="nodejs"><meta property="article:tag" content="reactjs"><meta property="article:tag" content="docker"><meta property="article:tag" content="kubernetes"><meta property="article:tag" content="ci"><meta property="article:tag" content="cd"><meta property="article:tag" content="jenkins"><meta property="article:tag" content="microservies"><meta property="article:tag" content="msa"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"author":{"@type":"Person","name":"Seongbin Kim"},"description":null}</script><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">카테고리</a></li><li class="is-active"><a href="#" aria-current="page">Linux</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-06-27T14:55:00.000Z" title="2021-06-27T14:55:00.000Z">21-06-27</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-06-27T14:59:23.390Z" title="2021-06-27T14:59:23.390Z">21-06-27</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">4분안에 읽기 (약 606 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/linux-sshd-security/">리눅스 - ssh/sshd의 보안에 대해 (2/2)</a></h1><div class="content"><p>이 글은 <a href="https://jsqna.com/linux-sshd-logs">1편</a>에 이어 SSHD의 보안 설정을 다룬다. SSHD의 설정 파일은 <code>/etc/ssh/sshd_config</code> 인데 아래의 내용은 해당 파일의 설정을 다룬다. 설정을 변경한 경우 <code>sudo systemctl restart sshd</code>로 SSHD를 재시작해줘야 한다. (WSL의 경우 systemctl이 지원되지 않는데, 단순히 <code>sudo service ssh --full-restart</code>를 실행하면 된다.)</p>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>카테고리: Linux - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="JS QnA"><meta property="og:url" content="https://jsqna.com/"><meta property="og:site_name" content="JS QnA"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="javascript"><meta property="article:tag" content="typescript"><meta property="article:tag" content="nodejs"><meta property="article:tag" content="reactjs"><meta property="article:tag" content="docker"><meta property="article:tag" content="kubernetes"><meta property="article:tag" content="ci"><meta property="article:tag" content="cd"><meta property="article:tag" content="jenkins"><meta property="article:tag" content="microservies"><meta property="article:tag" content="msa"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"author":{"@type":"Person","name":"Seongbin Kim"},"description":null}</script><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">카테고리</a></li><li class="is-active"><a href="#" aria-current="page">Linux</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-07-04T14:55:00.000Z" title="2021-07-04T14:55:00.000Z">21-07-04</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-07-03T08:24:28.238Z" title="2021-07-03T08:24:28.238Z">21-07-03</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">4분안에 읽기 (약 571 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/linux-virtualization-1/">리눅스에서의 가상화 솔루션의 종류와 특성 (1)</a></h1><div class="content"><blockquote>
+<p>기준 환경:</p>
+<p>Ubuntu 20.04.1 LTS (WSL2 by Windows 10 x64)</p>
+</blockquote>
+<p>이 글은 가상화에 대해 간략히 소개한다. 다음 글에서 리눅스에서의 가상화에 대해 조금 더 깊게 다룰 예정이다.</p>
+<hr>
+<h3 id="가상화란"><a href="#가상화란" class="headerlink" title="가상화란"></a><strong>가상화란</strong></h3><p>물리 자원을 추상화하는 방법 중 하나로, 하나의 물리 자원을 여러 개의 논리적 자원으로 나누거나, 여러 물리 자원을 하나의 논리적 자원으로 다루는 것을 말한다.</p>
+<ul>
+<li><p>각 자원이 서로에게 영향을 끼치지 못하므로, 장애 전파가 되지 않는다.</p>
+</li>
+<li><p>논리적인 자원을 유지하면서, 물리적인 자원을 교체할 수 있다.</p>
+</li>
+<li><p>물리적 자원간의 약간의 차이를 무시하기 위해 일반 사양으로 논리적 자원을 구성할 수 있다.</p>
+</li>
+</ul>
+<hr>
+<h3 id="가상화의-원리와-Linux에서의-가상화"><a href="#가상화의-원리와-Linux에서의-가상화" class="headerlink" title="가상화의 원리와 Linux에서의 가상화"></a><strong>가상화의 원리와 Linux에서의 가상화</strong></h3><p>기본적으로 가상화는 HW에서 지원해줘야 한다. 실제 CPU에 Guest OS를 실행했을 때, Guest OS가 제어권을 Host OS로 반환할 지 알 수 없기 때문이다. 따라서, HW는 Host OS가 관리할 수 있는 방식의 규칙과 제약을 제공한다. <a target="_blank" rel="noopener" href="https://superuser.com/questions/758018/how-does-virtualizing-differ-from-emulation-in-terms-of-structure">출처</a></p>
+<p>가상화 방식은 크게 Type 1 (= Full Virtualization), Type 2(= Para Virtualization) 가 있는데, 리눅스에서는 KVM, XEN이 주요 가상화 솔루션이다. </p>
+<ul>
+<li><p>Type 1의 경우 OS 레벨 아래에 Virtual Machine Monitor(Hypervisor)가 HW Layer 사이에 낀 Layer로 하드웨어를 가상화한다. KVM이 Type 1이며, Windows Hyper-V도 Type 1이다.</p>
+</li>
+<li><p>Type 2의 경우 Host OS와 Guest OS 사이에 Hypervisor가 위치한다. VirtualBox, VMWare 등이 Type 2이다. Mac의 경우 Parallels가 Type 2이다.</p>
+</li>
+<li><p>Type 2의 경우 상대적으로 높은 성능을 제공한다고 알려져 있다. </p>
+</li>
+<li><p>다만 Type 2 방식은 기존 OS에 수정을 해서 Guest OS를 만들어야 한다는 단점이 있다. </p>
+</li>
+<li><p>리눅스는 Type 2 방식의 Guest OS를 잘 지원한다.</p>
+</li>
+<li><p>Docker의 경우 컨테이너 기술이 커널 위에서 지원되므로 Hypervisor가 필요 없으나, Windows 및 Mac에서는 Linux Kernel이 필요하므로 리눅스 OS를 가상화로 띄워야 하므로 Hypervisor가 필요하다.</p>
+</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-06-27T14:55:00.000Z" title="2021-06-27T14:55:00.000Z">21-06-27</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-06-27T14:59:23.390Z" title="2021-06-27T14:59:23.390Z">21-06-27</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">4분안에 읽기 (약 606 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/linux-sshd-security/">리눅스 - ssh/sshd의 보안에 대해 (2/2)</a></h1><div class="content"><p>이 글은 <a href="https://jsqna.com/linux-sshd-logs">1편</a>에 이어 SSHD의 보안 설정을 다룬다. SSHD의 설정 파일은 <code>/etc/ssh/sshd_config</code> 인데 아래의 내용은 해당 파일의 설정을 다룬다. 설정을 변경한 경우 <code>sudo systemctl restart sshd</code>로 SSHD를 재시작해줘야 한다. (WSL의 경우 systemctl이 지원되지 않는데, 단순히 <code>sudo service ssh --full-restart</code>를 실행하면 된다.)</p>
 <blockquote>
 <p>기준 환경:</p>
 <p>Ubuntu 20.04.1 LTS (WSL2 by Windows 10 x64)<br>OpenSSH_8.2p1 Ubuntu-4ubuntu0.2, OpenSSL 1.1.1f  31 Mar 2020</p>
@@ -449,279 +481,7 @@
 <li>프로덕션 배포용 서버에 적절한 sudoer 설정에 대해 찾아보기</li>
 <li>sudo 등의 예시 외에도 리눅스 상에서 보안 관련한 기능과 설정들을 찾아보기</li>
 </ul>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-28T14:58:00.000Z" title="2021-03-28T14:58:00.000Z">21-03-28</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-03-28T14:56:25.740Z" title="2021-03-28T14:56:25.740Z">21-03-28</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">9분안에 읽기 (약 1334 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/linux-how-to-find-files/">리눅스에서 파일을 찾는 방법</a></h1><div class="content"><p>이 글은 리눅스 환경에서 파일을 찾는 방법을 정리한 글이다. <a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=131835745">리눅스 핵심 레퍼런스</a>를 참고하여 작성하였다.</p>
-<blockquote>
-<p>기준 환경:</p>
-<p>Ubuntu 20.04.1 LTS (WSL2 by Windows 10 x64)</p>
-</blockquote>
-<hr>
-<h3 id="파일을-찾는-명령의-종류"><a href="#파일을-찾는-명령의-종류" class="headerlink" title="파일을 찾는 명령의 종류"></a><strong>파일을 찾는 명령의 종류</strong></h3><table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>find</td>
-<td>파일, 디렉토리 검색 중 가장 많은 옵션을 제공한다. 상대적으로 느리다.</td>
-</tr>
-<tr>
-<td>locate (mlocate)</td>
-<td>파일, 디렉토리 Index를 만들고, 해당 Index 로 검색을 수행한다.</td>
-</tr>
-<tr>
-<td>which</td>
-<td>셸의 탐색 경로 내에서 <strong>명령어</strong>의 위치를 찾는다.</td>
-</tr>
-<tr>
-<td>type</td>
-<td>Bash 셸 내장 프로그램으로 which와 같은 기능이지만 더 빠르다.</td>
-</tr>
-<tr>
-<td>whereis</td>
-<td>매개변수로 주어진 디렉토리 목록에 대해 탐색한다.</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="find"><a href="#find" class="headerlink" title="find"></a><strong>find</strong></h3><p>find의 경우 Man Page가 굉장히 어려워 <a target="_blank" rel="noopener" href="https://www.tecmint.com/35-practical-examples-of-linux-find-command/">35 Practical Examples of Linux Find Command</a>를 참고했다. 해당 페이지 제목에서도 알 수 있듯, 한 명령어 설명에 35개의 예제가 들어간다는 것부터 범상치 않음을 짐작할 수 있다. find는 정말 그 기능이 너무나 많다. 정말 강력하다고 할 수 있으나 인덱싱이 지원되지 않아 탐색 대상이 늘어나면 꽤 느려져서 전체 디렉토리 대상으로 수행할 거라면 Interactive한 일회성 작업에 적절할 것 같다.</p>
-<p>아래의 모든 옵션은 직접 테스트 후 작성하였다.</p>
-<hr>
-<p><strong>1. 공통 기능</strong></p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-<th>Example</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>!</td>
-<td>옵션 앞에 <code>!</code>를 붙이면 NOT 조건이 된다.</td>
-<td><code>find ! -name &quot;*.txt&quot;</code></td>
-<td>“*.txt”에 매칭되지 않는 파일, 디렉토리만 출력</td>
-</tr>
-</tbody></table>
-<hr>
-<p><strong>2. 이름 기반 검색</strong></p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Example</th>
-<th>Ouput</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>(x)</td>
-<td><code>find</code></td>
-<td>하위 디렉토리 <strong>전부</strong> 재귀적으로 출력 (grep 하려면 전체 방문을 기다려야 함)</td>
-</tr>
-<tr>
-<td>-name</td>
-<td><code>find -name input.txt</code></td>
-<td>하위 디렉토리에서 <code>input.txt</code>를 찾아 출력</td>
-</tr>
-<tr>
-<td>-name “패턴”</td>
-<td><code>find -name &quot;*.txt&quot;</code></td>
-<td>*.txt에 매칭되는 파일/디렉토리 검색 (<code>*</code>만 사용 가능한지 모르겠음)</td>
-</tr>
-<tr>
-<td>(폴더 명시)</td>
-<td><code>find /bin (options...)</code></td>
-<td><code>/bin</code> 아래에서 검색을 수행</td>
-</tr>
-<tr>
-<td>-type</td>
-<td>`find -type (f</td>
-<td>d)`</td>
-</tr>
-</tbody></table>
-<hr>
-<p><strong>3. 권한 기반 검색</strong></p>
-<blockquote>
-<p>권한 비트 앞에 0, 1, 2 등 한 바이트가 더 표현할 수 있는데 SGID, Sticky Bit 등의 내용에 대해 잘 이해하고 있지 못해서 생략했다. 추후 보강하겠다.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Options</th>
-<th>Example</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-perm 권한</td>
-<td><code>find -perm 777</code></td>
-<td>권한이 777인 파일, 디렉토리를 출력</td>
-</tr>
-<tr>
-<td>-perm /권한</td>
-<td><code>find -perm /u=r</code></td>
-<td><strong>(이 부분은 스펙과 출력이 달라서 추후 갱신할 예정입니다.)</strong> user 권한이 r인 파일(Read-only), 디렉토리를 출력 (대신 첫 글자만 해석함. rw 등 안 됨)</td>
-</tr>
-</tbody></table>
-<hr>
-<p><strong>4. 출력에 대해 다른 명령어 수행</strong></p>
-<p><code>-exec</code> 옵션이 있는데, <code>-exec COMMAND &#123;&#125; \;</code>와 같이 표시하는 형태이다. <code>&#123;&#125;</code> 가 각 라인이 들어갈 placeholder인 듯하다. 다만 이는 Pipelining으로도 충분히 가능해보여서 (-exec은 스트리밍을 지원하는건가?) 설명은 생략한다.</p>
-<hr>
-<p><strong>5. 소유자 기반 검색</strong></p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Example</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-user 소유자명</td>
-<td><code>find -user root</code></td>
-<td>root 소유의 파일, 디렉토리 출력</td>
-</tr>
-<tr>
-<td>-group 그룹명</td>
-<td><code>find -group sb</code></td>
-<td>sb 소유의 파일, 디렉토리 출력 (sb는 제 유저명입니다)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>참고로 그룹의 목록은 /etc/group 파일에 텍스트로 저장돼있다 :)</p>
-</blockquote>
-<hr>
-<p><strong>6. 시간 속성 기반 검색</strong></p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Example</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-mtime N</td>
-<td><code>find ~ -mtime 1</code></td>
-<td>1일 내에 <strong>변경된</strong> <code>~</code> 내의 파일 출력</td>
-</tr>
-<tr>
-<td>-atime</td>
-<td></td>
-<td>접근 시각 기준</td>
-</tr>
-<tr>
-<td>-mtime +N -mtime -M</td>
-<td><code>find ~ -mtime +50 -mtime -100</code></td>
-<td>N일보다 더 지나고 N일 보다 덜 지난 날짜 사이에서 변경된 <code>~</code> 내의 파일 출력</td>
-</tr>
-<tr>
-<td>-cmin/mmin N</td>
-<td><code>find -cmin/mmin 60</code></td>
-<td>현재 디렉토리 아래에 변경된 지 60분 이내의 파일 출력</td>
-</tr>
-<tr>
-<td>-amin N</td>
-<td><code>find -amin 60</code></td>
-<td>현재 디렉토리 아래에 접근한 지 60분 이내의 파일 출력</td>
-</tr>
-</tbody></table>
-<p><strong>7. 파일 크기 기반 검색</strong></p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Example</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-size N</td>
-<td><code>find -size 50M</code></td>
-<td>50M인 파일 출력</td>
-</tr>
-<tr>
-<td>-size +N -M</td>
-<td><code>find -size +50M -100M</code></td>
-<td>50M ~ 100M인 파일 출력 (초과, 미만)</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="locate"><a href="#locate" class="headerlink" title="locate"></a><strong>locate</strong></h3><p>파일, 디렉토리 Index를 만들고, 해당 Index 로 검색을 수행한다. </p>
-<p>기본 Index 파일이 생성되는 경로는 <code>/var/lib/mlocate/mlocate.db</code> 이다.</p>
-<p>Index에서 검색하므로 가장 빠르다.</p>
-<table>
-<thead>
-<tr>
-<th>Options</th>
-<th>Example</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-b \NAME (–basename)</td>
-<td><code>locate \input.txt</code></td>
-<td>input.txt와 일치하는 이름을 가진 모든 파일/디렉토리를 출력</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="which-type"><a href="#which-type" class="headerlink" title="which, type"></a><strong>which, type</strong></h3><p>셸의 탐색 경로 내에서 명령어의 위치를 찾는다.</p>
-<table>
-<thead>
-<tr>
-<th>Options</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-a</td>
-<td>명령어에 대한 모든 일치하는 바이너리 위치를 출력</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a><strong>whereis</strong></h3><p>매개변수로 주어진 디렉토리 목록에 대해 탐색한다.</p>
-<p><code>whereis -bm ls tr -m gcc</code> : ls, tr 검색어에 대해 Binary, ManPage 검색 + gcc 검색어에 대해 ManPage 검색</p>
-<table>
-<thead>
-<tr>
-<th>Options</th>
-<th>Description</th>
-<th>Output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-b (binary)</td>
-<td>검색어에 대응되는 바이너리 검색을 한다</td>
-<td></td>
-</tr>
-<tr>
-<td>-B,M,S [directories…]</td>
-<td>-b/m/s 옵션으로 검색 시 탐색할 디렉토리</td>
-<td></td>
-</tr>
-<tr>
-<td>-m (manual)</td>
-<td>검색어에 대응되는 매뉴얼 검색을 한다 (Man Page)</td>
-<td></td>
-</tr>
-<tr>
-<td>-s (sources)</td>
-<td>검색에어 대응되는 소스파일 검색을 한다</td>
-<td></td>
-</tr>
-<tr>
-<td>-f</td>
-<td>-B, -M, -S 옵션 사용시 반드시 사용해야 함. 찾을 검색어와 옵션의 구분자 역할을 한다</td>
-<td></td>
-</tr>
-</tbody></table>
-<hr>
-<p>TODO:</p>
-<ul>
-<li>find 이외에는 문서가 자세하고 정확한 경우는 잘 없어서 조사가 더 필요할 것 같다.</li>
-</ul>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/categories/Linux/page/0/">이전</a></div><div class="pagination-next"><a href="/categories/Linux/page/2/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/categories/Linux/">1</a></li><li><a class="pagination-link" href="/categories/Linux/page/2/">2</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">10</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">13</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Frontend/"><span class="level-start"><span class="level-item">Frontend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Frontend/React-js/"><span class="level-start"><span class="level-item">React.js</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/NestJs/"><span class="level-start"><span class="level-item">NestJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-27T14:55:00.000Z">21-06-27</time></p><p class="title"><a href="/linux-sshd-security/">리눅스 - ssh/sshd의 보안에 대해 (2/2)</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-20T14:00:00.000Z">21-06-20</time></p><p class="title"><a href="/linux-system-log-1/">리눅스 - 시스템 로그와 로그인 로그</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-13T14:55:00.000Z">21-06-13</time></p><p class="title"><a href="/linux-sshd-logs/">리눅스 - ssh/sshd의 보안에 대해 (1/2)</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-06T14:43:00.000Z">21-06-06</time></p><p class="title"><a href="/linux-ufw/">우분투의 SW 기반 방화벽 - UFW</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-05-30T14:35:00.000Z">21-05-30</time></p><p class="title"><a href="/linux-filesystem-ext/">리눅스 파일 시스템의 구조 - ext 계열</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">6월 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">5월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">4월 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">3월 2021</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">2월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frontend/"><span class="tag">Frontend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NestJs/"><span class="tag">NestJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React-js/"><span class="tag">React.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/categories/Linux/page/0/">이전</a></div><div class="pagination-next"><a href="/categories/Linux/page/2/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/categories/Linux/">1</a></li><li><a class="pagination-link" href="/categories/Linux/page/2/">2</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">43</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">10</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">13</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Frontend/"><span class="level-start"><span class="level-item">Frontend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Frontend/React-js/"><span class="level-start"><span class="level-item">React.js</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/NestJs/"><span class="level-start"><span class="level-item">NestJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-07-04T14:55:00.000Z">21-07-04</time></p><p class="title"><a href="/linux-virtualization-1/">리눅스에서의 가상화 솔루션의 종류와 특성 (1)</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-27T14:55:00.000Z">21-06-27</time></p><p class="title"><a href="/linux-sshd-security/">리눅스 - ssh/sshd의 보안에 대해 (2/2)</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-20T14:00:00.000Z">21-06-20</time></p><p class="title"><a href="/linux-system-log-1/">리눅스 - 시스템 로그와 로그인 로그</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-13T14:55:00.000Z">21-06-13</time></p><p class="title"><a href="/linux-sshd-logs/">리눅스 - ssh/sshd의 보안에 대해 (1/2)</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-06T14:43:00.000Z">21-06-06</time></p><p class="title"><a href="/linux-ufw/">우분투의 SW 기반 방화벽 - UFW</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">7월 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">6월 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">5월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">4월 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">3월 2021</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">2월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frontend/"><span class="tag">Frontend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">13</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NestJs/"><span class="tag">NestJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React-js/"><span class="tag">React.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
