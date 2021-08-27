@@ -1,44 +1,106 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>tmux 사용법 정리 - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="tmux의 사용법을 알아본다. 그동안 너무 귀찮아서.. 여러 터미널이 필요할 때 그냥 여러 터미널을 사용했었는데, Ubuntu에 기본으로 내장돼있기도 하고 고수 분들이 기본으로 사용하시는 것들을 어깨 너머로 봤기 때문에 약간의 시간을 들여 학습했다.   1. 네트워크 연결 보호 기능ssh 연결과 터미널 화면의 생명주기가 별개이다. 터미널을 실수로 꺼도, s"><meta property="og:type" content="blog"><meta property="og:title" content="tmux 사용법 정리"><meta property="og:url" content="https://jsqna.com/linux-tmux/"><meta property="og:site_name" content="JS QnA"><meta property="og:description" content="tmux의 사용법을 알아본다. 그동안 너무 귀찮아서.. 여러 터미널이 필요할 때 그냥 여러 터미널을 사용했었는데, Ubuntu에 기본으로 내장돼있기도 하고 고수 분들이 기본으로 사용하시는 것들을 어깨 너머로 봤기 때문에 약간의 시간을 들여 학습했다.   1. 네트워크 연결 보호 기능ssh 연결과 터미널 화면의 생명주기가 별개이다. 터미널을 실수로 꺼도, s"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:published_time" content="2021-05-09T14:10:00.000Z"><meta property="article:modified_time" content="2021-05-09T14:02:32.368Z"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="Linux"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com/linux-tmux/"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"datePublished":"2021-05-09T14:10:00.000Z","dateModified":"2021-05-09T14:02:32.368Z","author":{"@type":"Person","name":"Seongbin Kim"},"description":"tmux의 사용법을 알아본다. 그동안 너무 귀찮아서.. 여러 터미널이 필요할 때 그냥 여러 터미널을 사용했었는데, Ubuntu에 기본으로 내장돼있기도 하고 고수 분들이 기본으로 사용하시는 것들을 어깨 너머로 봤기 때문에 약간의 시간을 들여 학습했다.   1. 네트워크 연결 보호 기능ssh 연결과 터미널 화면의 생명주기가 별개이다. 터미널을 실수로 꺼도, s"}</script><link rel="canonical" href="https://jsqna.com/linux-tmux/"><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-05-09T14:10:00.000Z" title="2021-05-09T14:10:00.000Z">21-05-09</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-05-09T14:02:32.368Z" title="2021-05-09T14:02:32.368Z">21-05-09</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">3분안에 읽기 (약 475 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">tmux 사용법 정리</h1><div class="content"><p>tmux의 사용법을 알아본다. 그동안 너무 귀찮아서.. 여러 터미널이 필요할 때 그냥 여러 터미널을 사용했었는데, Ubuntu에 기본으로 내장돼있기도 하고 고수 분들이 기본으로 사용하시는 것들을 어깨 너머로 봤기 때문에 약간의 시간을 들여 학습했다. </p>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>## uptime, top으로 CPU 부하 확인하기 - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="이 글은 RabbitMQ에서 하나의 One Queue, One Producer, Two Consumer로 구성해 메시지를 처리하는 과정을 모니터링하는 방법을 다룬다.  이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.  “데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.  코드가 예전보다"><meta property="og:type" content="blog"><meta property="og:title" content="## uptime, top으로 CPU 부하 확인하기"><meta property="og:url" content="https://jsqna.com/linux-uptime-top/"><meta property="og:site_name" content="JS QnA"><meta property="og:description" content="이 글은 RabbitMQ에서 하나의 One Queue, One Producer, Two Consumer로 구성해 메시지를 처리하는 과정을 모니터링하는 방법을 다룬다.  이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.  “데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.  코드가 예전보다"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/images/top_screenshot.png"><meta property="article:published_time" content="2021-08-29T14:59:00.000Z"><meta property="article:modified_time" content="2021-08-27T22:36:49.796Z"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="Linux"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/top_screenshot.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com/linux-uptime-top/"},"headline":"JS QnA","image":["https://jsqna.com/images/top_screenshot.png"],"datePublished":"2021-08-29T14:59:00.000Z","dateModified":"2021-08-27T22:36:49.796Z","author":{"@type":"Person","name":"Seongbin Kim"},"description":"이 글은 RabbitMQ에서 하나의 One Queue, One Producer, Two Consumer로 구성해 메시지를 처리하는 과정을 모니터링하는 방법을 다룬다.  이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.  “데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.  코드가 예전보다"}</script><link rel="canonical" href="https://jsqna.com/linux-uptime-top/"><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-08-29T14:59:00.000Z" title="2021-08-29T14:59:00.000Z">21-08-29</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-08-27T22:36:49.796Z" title="2021-08-27T22:36:49.796Z">21-08-28</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">7분안에 읽기 (약 1115 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">## uptime, top으로 CPU 부하 확인하기</h1><div class="content"><p>이 글은 RabbitMQ에서 하나의 One Queue, One Producer, Two Consumer로 구성해 메시지를 처리하는 과정을 모니터링하는 방법을 다룬다.</p>
 <hr>
-<h4 id="1-네트워크-연결-보호-기능"><a href="#1-네트워크-연결-보호-기능" class="headerlink" title="1. 네트워크 연결 보호 기능"></a><strong>1. 네트워크 연결 보호 기능</strong></h4><p>ssh 연결과 터미널 화면의 생명주기가 별개이다.</p>
-<p>터미널을 실수로 꺼도, ssh 연결은 백그라운드로 살아 있다.</p>
+<p>이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.</p>
+<blockquote>
+<p>“데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.</p>
+</blockquote>
+<p>코드가 예전보다 훨씬 느리게 실행돼 응답이 느려졌다면 무엇부터 확인해야 할까?</p>
+<p>시스템의 특정 자원을 모두 소비했기 때문에 시스템이 느려질 수도 있다.</p>
+<p>여기서 말하는 자원의 종류로는</p>
 <ul>
-<li>새 터미널을 열어서 <code>tmux at(tach)</code> 로 다시 세션에 붙을 수 있다.</li>
-<li><code>tmux at -t 세션넘버</code>로 특정 세션을 종료할 수 있다.</li>
+<li>CPU</li>
+<li>Main Memory</li>
+<li>Disk I/O</li>
+<li>Network I/O (이 글에서 다루지 않는다.)</li>
+</ul>
+<p>이 있고, 이 글은 CPU 부하에 한정해 소개한다.</p>
+<h4 id="uptime"><a href="#uptime" class="headerlink" title="uptime"></a><strong>uptime</strong></h4><p><code>load average</code> 다음의 세 실수가 중요하다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ uptime</span><br><span class="line"> 05:23:41 up 5 days,  1:41,  0 users,  load average: 0.00, 0.00, 0.00</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>System load averages is the average number of processes that are either in a runnable or uninterruptable state.  A  process  in  a runnable  state is either using the CPU or waiting to use the CPU.  A process in uninterruptable state is waiting for some I/O access, eg waiting for disk.  The averages are taken over the three time intervals.  Load averages are not normalized for the number of  CPUs  in a system, so a load average of 1 means a single CPU system is loaded all the time while on a 4 CPU system it means it was idle 75% of the time.</p>
+<p>[man uptime]</p>
+</blockquote>
+<p>load average는 실행 중 혹은 인터럽트 불가능한 상태의 프로세스의 평균 개수이다. </p>
+<ul>
+<li>실행 중인 프로세스: CPU를 사용 중이거나 CPU 사용을 기다리는 중인 프로세스</li>
+<li>인터럽트 불가능한 프로세스: I/O 접근을 대기하는 프로세스</li>
+</ul>
+<p>예를 들어 average가 <code>1.00</code>이면 항상 1개의 프로세스가 실행 된다는 것으로 1개의 코어의 로드가 100%라는 의미이다.</p>
+<blockquote>
+<p>[<a target="_blank" rel="noopener" href="https://superuser.com/questions/1105654/logical-vs-physical-cpu-performance">superuser</a>]</p>
+<p>멀티코어 CPU에서는 코어 별로 독립적인(병렬적인, parallel) 프로세스(스레드) 실행이 가능하기 때문에 프로세스 개수가 n이면 <code>n</code>이 전체 코어의 로드가 100%임을 나타내는 것이다.</p>
+<p>Hyperthreading이 적용되어 CPU에서 2배의 스레드 실행이 가능한 경우 <code>2n</code>이 100%의 로드를 나타낼 것이다. </p>
+<ul>
+<li>(ex) <a target="_blank" rel="noopener" href="https://ark.intel.com/content/www/kr/ko/ark/products/212282/intel-xeon-platinum-8358-processor-48m-cache-2-60-ghz.html">코어 수 32, 스레드 수 64인 Xeon 프로세서</a>의 경우 64.00이 100%의 로드를 나타낸다.</li>
+</ul>
+</blockquote>
+<p>다시 돌아와서, <code>uptime</code>이 표시하는 세 개의 숫자는 <strong>각각 최근 1분, 5분, 15분</strong>의 프로세스 평균 개수를 의미한다.</p>
+<p>최근 1분의 부하는 현재 시스템에 가해지는 부하를 나타내는 것이다.</p>
+<p>아래의 예시를 살펴보자.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ uptime</span><br><span class="line"> 05:23:41 up 25 days,  1:41,  2 users,  load average: 17.29, 1.12, 0.10</span><br></pre></td></tr></table></figure>
+<p>최근 15분간의 로드가 거의 없던 것에 비해 현재 1분의 로드가 꽤 큰 것을 확인할 수 있다.</p>
+<ul>
+<li>따라서 부하는 최근에 시작됐음을 확인할 수 있다.</li>
 </ul>
 <hr>
-<h4 id="2-다중-화면-기능"><a href="#2-다중-화면-기능" class="headerlink" title="2. 다중 화면 기능"></a><strong>2. 다중 화면 기능</strong></h4><ul>
-<li><p>Ctrl + b 를 통해 명령어 모드 활성</p>
-</li>
-<li><p>Ctrl + b 후 <code>&quot;</code>를 누르면 새 <strong>가로</strong> 패널 생성 (<code>%</code>를 누르면 <strong>세로</strong> 패널 생성)</p>
-</li>
-<li><p>Ctrl + b + <code>방향키</code>를 누르면 각 패널 전환</p>
-</li>
-<li><p>Ctrl + b + <code>z</code>를 누르면 현재 활성 패널을 전체화면으로 전환 (toggle)</p>
-</li>
-<li><p>Ctrl + b + <code>Alt + 방향키</code>를 누르면 현재 패널의 크기를 조절</p>
-</li>
-<li><p>Ctrl + b + <code>space</code>를 누르면 preset 패널 구성으로 배열함</p>
-</li>
-<li><p>Ctrl + b + <code>d</code>를 누르면 tmux에서 원래 터미널로 돌아옴. (<code>tmux ls</code>로 각 세션 넘버 확인을, <code>tmux</code>로 새 세션을 생성할 수도 있다.)</p>
-</li>
-<li><p>새 세션인지는 tmux의 상태바에서 <code>[0]</code>의 숫자를 확인하면 된다. (이 경우 0).</p>
-</li>
-<li><p>Ctrl + b + <code>x</code>로 현재 패널을 제거할 수 있다. (마지막 패널 제거 시 현재 tmux 세션이 종료된다.)</p>
-</li>
-</ul>
-<hr>
-<h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a><strong>TODO</strong></h4><ol>
-<li>셸 프로그래밍 기초 학습하기</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/google/zx">google/zx</a> 써보고 가이드 작성하기<ul>
-<li>너무 좋은 것 같다. async/await에 딱 맞는 자체 선언형 API에 nodejs를 그대로 사용할 수 있다는 점이 너무 좋다.</li>
-</ul>
-</li>
-</ol>
-</div><div class="article-licensing box"><div class="licensing-title"><p>tmux 사용법 정리</p><p><a href="https://jsqna.com/linux-tmux/">https://jsqna.com/linux-tmux/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Seongbin Kim</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>21-05-09</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>21-05-09</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Linux/">Linux</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/linux-namespaces-2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Linux와 Docker의 기술적 관계 (2/3) - Network Namespace 기초</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/linux-namespaces-1/"><span class="level-item">Linux와 Docker의 기술적 관계 (1/3) - Namespace</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'https://jsqna.com/linux-tmux/';
-            this.page.identifier = 'linux-tmux/';
+<h4 id="top"><a href="#top" class="headerlink" title="top"></a><strong>top</strong></h4><p>top은 기본값으로 CPU 사용률로 프로세스 정보를 나열하는 유틸이지만, 상단에 표시된 <code>%Cpu(s)</code>행은 CPU 정보를 표시한다.</p>
+<p><img src="/images/top_screenshot.png"></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Full Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>us</td>
+<td>User CPU time</td>
+<td>사용자 프로세스가 소비한 CPU 사용량 비율 (nice가 적용되지 않은)</td>
+</tr>
+<tr>
+<td>sy</td>
+<td>System CPU time</td>
+<td>커널과 커널 프로세스의 CPU 사용량 비율</td>
+</tr>
+<tr>
+<td>ni</td>
+<td>nice CPU time</td>
+<td>nice가 적용된 프로세스의 CPU 사용량 비율</td>
+</tr>
+<tr>
+<td>id</td>
+<td>CPU idle time</td>
+<td>CPU가 사용되지 않는 유휴 비율</td>
+</tr>
+<tr>
+<td>wa</td>
+<td>I/O wait</td>
+<td>CPU가 I/O를 대기하면서 소비한 시간의 비율</td>
+</tr>
+<tr>
+<td>hi</td>
+<td>hardware interrupts</td>
+<td>하드웨어 인터럽트를 제공하는데 CPU가 소비한 시간의 비율</td>
+</tr>
+<tr>
+<td>si</td>
+<td>software interrupts</td>
+<td>소프트웨어 인터럽트를 제공하는데 CPU가 소비한 시간의 비율</td>
+</tr>
+<tr>
+<td>st</td>
+<td>steal time</td>
+<td>(비교적 세부 사항이라 생략)</td>
+</tr>
+</tbody></table>
+<p>위 표에서 가장 중요한 값은 <code>wa</code>라고 한다. 이 값이 낮으면 I/O가 문제가 아니라고 한다.</p>
+<p>I/O 대기(<code>wa</code>)와 유휴 시간(<code>id</code>)이 모두 낮으면 사용자 CPU 사용률(<code>us</code>)을 확인하고 어떤 프로세스가 높은 CPU 사용량을 보이는지 확인해야 한다.</p>
+<p>I/O 대기는 낮은데 유휴 시간은 높다면 병목은 CPU가 아니다. (당연하다. 유휴시간이 있다는 것 자체가..)</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>## uptime, top으로 CPU 부하 확인하기</p><p><a href="https://jsqna.com/linux-uptime-top/">https://jsqna.com/linux-uptime-top/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Seongbin Kim</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>21-08-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>21-08-28</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Linux/">Linux</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/linux-rmq-monitoring-easy/"><span class="level-item">리눅스에서 tmux와 rabbitmqctl을 이용한 Queue 잔여 메시지 모니터링하기</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jsqna.com/linux-uptime-top/';
+            this.page.identifier = 'linux-uptime-top/';
         };
         (function() {
             var d = document, s = d.createElement('script');  
