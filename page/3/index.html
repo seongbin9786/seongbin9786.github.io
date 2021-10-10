@@ -1,5 +1,277 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="JS QnA"><meta property="og:url" content="https://jsqna.com/"><meta property="og:site_name" content="JS QnA"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="javascript"><meta property="article:tag" content="typescript"><meta property="article:tag" content="nodejs"><meta property="article:tag" content="reactjs"><meta property="article:tag" content="docker"><meta property="article:tag" content="kubernetes"><meta property="article:tag" content="ci"><meta property="article:tag" content="cd"><meta property="article:tag" content="jenkins"><meta property="article:tag" content="microservies"><meta property="article:tag" content="msa"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"author":{"@type":"Person","name":"Seongbin Kim"},"description":null}</script><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-26T08:00:00.000Z" title="2021-03-26T08:00:00.000Z">21-03-26</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-03-26T05:25:16.490Z" title="2021-03-26T05:25:16.490Z">21-03-26</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/">Node.js 디자인 패턴</a></span><span class="level-item">몇 초안에 읽기 (약 97 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/ndp-5-stream-5/">Stream 생태계 정리</a></h1><div class="content"><p>이 글에서는 Node.js Stream API 생태계를 정리한다.</p>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="JS QnA"><meta property="og:url" content="https://jsqna.com/"><meta property="og:site_name" content="JS QnA"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="javascript"><meta property="article:tag" content="typescript"><meta property="article:tag" content="nodejs"><meta property="article:tag" content="reactjs"><meta property="article:tag" content="docker"><meta property="article:tag" content="kubernetes"><meta property="article:tag" content="ci"><meta property="article:tag" content="cd"><meta property="article:tag" content="jenkins"><meta property="article:tag" content="microservies"><meta property="article:tag" content="msa"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"author":{"@type":"Person","name":"Seongbin Kim"},"description":null}</script><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-28T14:58:00.000Z" title="2021-03-28T14:58:00.000Z">21-03-28</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-03-28T14:56:25.740Z" title="2021-03-28T14:56:25.740Z">21-03-28</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">9분안에 읽기 (약 1334 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/linux-how-to-find-files/">리눅스에서 파일을 찾는 방법</a></h1><div class="content"><p>이 글은 리눅스 환경에서 파일을 찾는 방법을 정리한 글이다. <a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=131835745">리눅스 핵심 레퍼런스</a>를 참고하여 작성하였다.</p>
+<blockquote>
+<p>기준 환경:</p>
+<p>Ubuntu 20.04.1 LTS (WSL2 by Windows 10 x64)</p>
+</blockquote>
+<hr>
+<h3 id="파일을-찾는-명령의-종류"><a href="#파일을-찾는-명령의-종류" class="headerlink" title="파일을 찾는 명령의 종류"></a><strong>파일을 찾는 명령의 종류</strong></h3><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>find</td>
+<td>파일, 디렉토리 검색 중 가장 많은 옵션을 제공한다. 상대적으로 느리다.</td>
+</tr>
+<tr>
+<td>locate (mlocate)</td>
+<td>파일, 디렉토리 Index를 만들고, 해당 Index 로 검색을 수행한다.</td>
+</tr>
+<tr>
+<td>which</td>
+<td>셸의 탐색 경로 내에서 <strong>명령어</strong>의 위치를 찾는다.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Bash 셸 내장 프로그램으로 which와 같은 기능이지만 더 빠르다.</td>
+</tr>
+<tr>
+<td>whereis</td>
+<td>매개변수로 주어진 디렉토리 목록에 대해 탐색한다.</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a><strong>find</strong></h3><p>find의 경우 Man Page가 굉장히 어려워 <a target="_blank" rel="noopener" href="https://www.tecmint.com/35-practical-examples-of-linux-find-command/">35 Practical Examples of Linux Find Command</a>를 참고했다. 해당 페이지 제목에서도 알 수 있듯, 한 명령어 설명에 35개의 예제가 들어간다는 것부터 범상치 않음을 짐작할 수 있다. find는 정말 그 기능이 너무나 많다. 정말 강력하다고 할 수 있으나 인덱싱이 지원되지 않아 탐색 대상이 늘어나면 꽤 느려져서 전체 디렉토리 대상으로 수행할 거라면 Interactive한 일회성 작업에 적절할 것 같다.</p>
+<p>아래의 모든 옵션은 직접 테스트 후 작성하였다.</p>
+<hr>
+<p><strong>1. 공통 기능</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>!</td>
+<td>옵션 앞에 <code>!</code>를 붙이면 NOT 조건이 된다.</td>
+<td><code>find ! -name &quot;*.txt&quot;</code></td>
+<td>“*.txt”에 매칭되지 않는 파일, 디렉토리만 출력</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>2. 이름 기반 검색</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example</th>
+<th>Ouput</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(x)</td>
+<td><code>find</code></td>
+<td>하위 디렉토리 <strong>전부</strong> 재귀적으로 출력 (grep 하려면 전체 방문을 기다려야 함)</td>
+</tr>
+<tr>
+<td>-name</td>
+<td><code>find -name input.txt</code></td>
+<td>하위 디렉토리에서 <code>input.txt</code>를 찾아 출력</td>
+</tr>
+<tr>
+<td>-name “패턴”</td>
+<td><code>find -name &quot;*.txt&quot;</code></td>
+<td>*.txt에 매칭되는 파일/디렉토리 검색 (<code>*</code>만 사용 가능한지 모르겠음)</td>
+</tr>
+<tr>
+<td>(폴더 명시)</td>
+<td><code>find /bin (options...)</code></td>
+<td><code>/bin</code> 아래에서 검색을 수행</td>
+</tr>
+<tr>
+<td>-type</td>
+<td>`find -type (f</td>
+<td>d)`</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>3. 권한 기반 검색</strong></p>
+<blockquote>
+<p>권한 비트 앞에 0, 1, 2 등 한 바이트가 더 표현할 수 있는데 SGID, Sticky Bit 등의 내용에 대해 잘 이해하고 있지 못해서 생략했다. 추후 보강하겠다.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-perm 권한</td>
+<td><code>find -perm 777</code></td>
+<td>권한이 777인 파일, 디렉토리를 출력</td>
+</tr>
+<tr>
+<td>-perm /권한</td>
+<td><code>find -perm /u=r</code></td>
+<td><strong>(이 부분은 스펙과 출력이 달라서 추후 갱신할 예정입니다.)</strong> user 권한이 r인 파일(Read-only), 디렉토리를 출력 (대신 첫 글자만 해석함. rw 등 안 됨)</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>4. 출력에 대해 다른 명령어 수행</strong></p>
+<p><code>-exec</code> 옵션이 있는데, <code>-exec COMMAND &#123;&#125; \;</code>와 같이 표시하는 형태이다. <code>&#123;&#125;</code> 가 각 라인이 들어갈 placeholder인 듯하다. 다만 이는 Pipelining으로도 충분히 가능해보여서 (-exec은 스트리밍을 지원하는건가?) 설명은 생략한다.</p>
+<hr>
+<p><strong>5. 소유자 기반 검색</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-user 소유자명</td>
+<td><code>find -user root</code></td>
+<td>root 소유의 파일, 디렉토리 출력</td>
+</tr>
+<tr>
+<td>-group 그룹명</td>
+<td><code>find -group sb</code></td>
+<td>sb 소유의 파일, 디렉토리 출력 (sb는 제 유저명입니다)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>참고로 그룹의 목록은 /etc/group 파일에 텍스트로 저장돼있다 :)</p>
+</blockquote>
+<hr>
+<p><strong>6. 시간 속성 기반 검색</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-mtime N</td>
+<td><code>find ~ -mtime 1</code></td>
+<td>1일 내에 <strong>변경된</strong> <code>~</code> 내의 파일 출력</td>
+</tr>
+<tr>
+<td>-atime</td>
+<td></td>
+<td>접근 시각 기준</td>
+</tr>
+<tr>
+<td>-mtime +N -mtime -M</td>
+<td><code>find ~ -mtime +50 -mtime -100</code></td>
+<td>N일보다 더 지나고 N일 보다 덜 지난 날짜 사이에서 변경된 <code>~</code> 내의 파일 출력</td>
+</tr>
+<tr>
+<td>-cmin/mmin N</td>
+<td><code>find -cmin/mmin 60</code></td>
+<td>현재 디렉토리 아래에 변경된 지 60분 이내의 파일 출력</td>
+</tr>
+<tr>
+<td>-amin N</td>
+<td><code>find -amin 60</code></td>
+<td>현재 디렉토리 아래에 접근한 지 60분 이내의 파일 출력</td>
+</tr>
+</tbody></table>
+<p><strong>7. 파일 크기 기반 검색</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-size N</td>
+<td><code>find -size 50M</code></td>
+<td>50M인 파일 출력</td>
+</tr>
+<tr>
+<td>-size +N -M</td>
+<td><code>find -size +50M -100M</code></td>
+<td>50M ~ 100M인 파일 출력 (초과, 미만)</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="locate"><a href="#locate" class="headerlink" title="locate"></a><strong>locate</strong></h3><p>파일, 디렉토리 Index를 만들고, 해당 Index 로 검색을 수행한다. </p>
+<p>기본 Index 파일이 생성되는 경로는 <code>/var/lib/mlocate/mlocate.db</code> 이다.</p>
+<p>Index에서 검색하므로 가장 빠르다.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b \NAME (–basename)</td>
+<td><code>locate \input.txt</code></td>
+<td>input.txt와 일치하는 이름을 가진 모든 파일/디렉토리를 출력</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="which-type"><a href="#which-type" class="headerlink" title="which, type"></a><strong>which, type</strong></h3><p>셸의 탐색 경로 내에서 명령어의 위치를 찾는다.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>명령어에 대한 모든 일치하는 바이너리 위치를 출력</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a><strong>whereis</strong></h3><p>매개변수로 주어진 디렉토리 목록에 대해 탐색한다.</p>
+<p><code>whereis -bm ls tr -m gcc</code> : ls, tr 검색어에 대해 Binary, ManPage 검색 + gcc 검색어에 대해 ManPage 검색</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b (binary)</td>
+<td>검색어에 대응되는 바이너리 검색을 한다</td>
+<td></td>
+</tr>
+<tr>
+<td>-B,M,S [directories…]</td>
+<td>-b/m/s 옵션으로 검색 시 탐색할 디렉토리</td>
+<td></td>
+</tr>
+<tr>
+<td>-m (manual)</td>
+<td>검색어에 대응되는 매뉴얼 검색을 한다 (Man Page)</td>
+<td></td>
+</tr>
+<tr>
+<td>-s (sources)</td>
+<td>검색에어 대응되는 소스파일 검색을 한다</td>
+<td></td>
+</tr>
+<tr>
+<td>-f</td>
+<td>-B, -M, -S 옵션 사용시 반드시 사용해야 함. 찾을 검색어와 옵션의 구분자 역할을 한다</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<p>TODO:</p>
+<ul>
+<li>find 이외에는 문서가 자세하고 정확한 경우는 잘 없어서 조사가 더 필요할 것 같다.</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-26T08:00:00.000Z" title="2021-03-26T08:00:00.000Z">21-03-26</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-03-26T05:25:16.490Z" title="2021-03-26T05:25:16.490Z">21-03-26</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/">Node.js 디자인 패턴</a></span><span class="level-item">몇 초안에 읽기 (약 97 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/ndp-5-stream-5/">Stream 생태계 정리</a></h1><div class="content"><p>이 글에서는 Node.js Stream API 생태계를 정리한다.</p>
 <hr>
 <hr>
 <p>TODO:</p>
@@ -589,84 +861,7 @@
 <li><p>아직도 Node.js 생태계에 대해 제대로 이해하지 못 하고 있다는 점을 또 알게됐다. 아직 해결되지 못한 질문들에 대해 데이터를 찾아서 반드시 답을 내리고 싶다.</p>
 </li>
 </ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-02-01T09:00:00.000Z" title="2021-02-01T09:00:00.000Z">21-02-01</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-03-03T11:53:48.260Z" title="2021-03-03T11:53:48.260Z">21-03-03</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/">Node.js 디자인 패턴</a></span><span class="level-item">12분안에 읽기 (약 1828 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/ndp-5-stream-1/">5장 Stream API (1/3) - 스트림 개요 및 Readable Stream</a></h1><div class="content"><p>이 글은 Node.js 디자인 패턴 CH 05 스트림 코딩의 일부를 참고해서 작성하였다. 이번 글은 Stream API에 대해 깊이 다루기보다 스트림 자체에 대해 다룬다.</p>
-<hr>
-<h3 id="스트림-개요"><a href="#스트림-개요" class="headerlink" title="스트림 개요"></a><strong>스트림 개요</strong></h3><p>스트림은 파일을 버퍼 단위로 옮겨서 전부 옮길 때까지 기다린 후 처리하기보다 매 버퍼 단위로 전송하는 방식이다.</p>
-<p>스트림은 본질적으로 비동기 패러다임으로, <u>기다린 후</u> 처리하는 Sync 방식에 대비된다. 물론 <code>fs.readFile</code> 역시 Node.js 런타임에서 I/O를 처리해주니 스레드가 Block 되진 않겠지만, 애초에 <u>I/O 수준에서도 기다릴 일이 없게</u> 하는 것이 처리량에서 우위이지 않을까? </p>
-<p>(처리량에서 정말 우위일지는 잘 모르겠다. 스트리밍 오버헤드에 대해 공부해본 적이 없기 때문.)</p>
-<h3 id="스트림의-공간-효율성"><a href="#스트림의-공간-효율성" class="headerlink" title="스트림의 공간 효율성"></a><strong>스트림의 공간 효율성</strong></h3><p>스트림은 메모리에 파일의 전체 내용을 올리지 않고 버퍼의 크기만큼만 메모리를 할당하기 때문에 공간 효율적이다. 더 좋은 점은 <u>파일의 크기에 상관 없이</u> 일정한 양의 메모리를 점유한다는 점이다.</p>
-<blockquote>
-<p>이것과 별개로 V8 엔진은 32bit 기준 ~1GB, 64bit 기준 ~1.7GB 정도의 메모리만 사용하도록 설정돼있어(더 높이려면 빌드해야 함.) 파일이 큰 경우 전체 파일을 한 번에 메모리에 올릴 수 없음.</p>
-</blockquote>
-<hr>
-<p>공간 비효율적인 파일 압축 코드 (ex: example.tar -&gt; example.tar.gz)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> zlib = <span class="built_in">require</span>(<span class="string">&#x27;zlib&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> file = process.argv[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">fs.readFile(file, <span class="function">(<span class="params">err, buffer</span>) =&gt;</span> &#123;</span><br><span class="line">  zlib.gzip(buffer, <span class="function">(<span class="params">err, buffer</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.writeFile(file + <span class="string">&#x27;.gz&#x27;</span>, buffer, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;File successfully compressed&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>공간 효율적인 파일 압축 코드 (Stream API)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> zlib = <span class="built_in">require</span>(<span class="string">&#x27;zlib&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> file = process.argv[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 파일을 읽는데에 buffer 크기만큼만 메모리를 점유하기 때문에 공간 효율적</span></span><br><span class="line"><span class="comment">// pipe 체이닝으로 각 chunk에 대해 이런 저런 처리를 할 수 있음.</span></span><br><span class="line">fs.createReadStream(file)</span><br><span class="line">  .pipe(zlib.createGzip())</span><br><span class="line">  .pipe(fs.createWriteStream(file + <span class="string">&#x27;.gz&#x27;</span>))</span><br><span class="line">  .on(<span class="string">&#x27;finish&#x27;</span>, <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;File successfully compressed&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>참고로 gzip이 어떻게 스트림에 대해 동작하는지 궁금하다면 아래 글들을 참고해보면 좋을 것 같다.</p>
-<p><a target="_blank" rel="noopener" href="https://softwareengineering.stackexchange.com/questions/393834/how-is-it-possible-to-gzip-a-stream-before-the-entire-contents-are-known">How is it possible to GZIP a stream before the entire contents are known? | StackOverFlow</a> </p>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/19700503/how-does-gzip-compression-rate-change-when-streaming-data">How does gzip compression rate change when streaming data? | StackOverFlow</a></p>
-<hr>
-<h3 id="스트림의-시간-효율성"><a href="#스트림의-시간-효율성" class="headerlink" title="스트림의 시간 효율성"></a><strong>스트림의 시간 효율성</strong></h3><p>Stream은 TTFB(Time to First Byte)에 강점이 있는데, TTFB는 파일의 크기에 비례하여 빠를 수 밖에 없다. 파일의 크기가 클 수록 읽는 데 대기시간이 필요하지만 Stream은 곧바로 응답을 보내기 시작하기 때문이다.</p>
-<blockquote>
-<p>웹에서 TTFB는 매우 중요하다.</p>
-<p>자세한 건 <a target="_blank" rel="noopener" href="https://github.com/vercel/next.js/issues/1209">Next.js의 재밌는 이슈(Stream rendering to reduce TTFB and CPU load)</a> 참고.</p>
-</blockquote>
-<h4 id="파일을-단위로-전송하는-Server-Client-모델"><a href="#파일을-단위로-전송하는-Server-Client-모델" class="headerlink" title="파일을 단위로 전송하는 Server-Client 모델"></a><strong>파일을 단위로 전송하는 Server-Client 모델</strong></h4><p>다음의 사이클을 단 1회 거치게 된다: read &gt; compress &gt; send &gt; receive &gt; decompress &gt; write</p>
-<hr>
-<h4 id="chunk-단위로-전송하는-Server-Client-모델"><a href="#chunk-단위로-전송하는-Server-Client-모델" class="headerlink" title="chunk 단위로 전송하는 Server-Client 모델"></a><strong>chunk 단위로 전송하는 Server-Client 모델</strong></h4><p>위의 사이클을 매 chunk마다 거치게 되므로 파이프라이닝과 같은 형태로 병렬 처리가 가능하다. 물론 chunk의 크기마다 다르겠지만 각 단계를 거치는 만큼 오버헤드가 있을 것이다. (HTTP header 등. 이 부분에 대해선 잘 알지 못한다.)</p>
-<blockquote>
-<p> Node.js 동시성을 활용하는 것이므로 순서를 맞춰줘야 하는데 Stream API가 알아서 처리한다고 한다. </p>
-</blockquote>
-<hr>
-<p>아래는 파일을 전송하는 스트림 예제 코드이다.</p>
-<p><strong>client</strong>: 파일을 받아 디스크에 쓰는 역할</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> zlib = <span class="built_in">require</span>(<span class="string">&#x27;zlib&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> filename = req.headers.filename;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;File request received: &#x27;</span> + filename);</span><br><span class="line">  req</span><br><span class="line">    .pipe(zlib.createGunzip())</span><br><span class="line">    .pipe(fs.createWriteStream(filename))</span><br><span class="line">    .on(<span class="string">&#x27;finish&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      res.writeHead(<span class="number">201</span> <span class="comment">/* CREATED */</span>, &#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain&#x27;</span>&#125;);</span><br><span class="line">      res.end(<span class="string">&#x27;That\&#x27;s it\n&#x27;</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`File saved: <span class="subst">$&#123;filename&#125;</span>`</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>, <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;Listening&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p><strong>server</strong>: 파일을 읽고 전송하는 역할</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> zlib = <span class="built_in">require</span>(<span class="string">&#x27;zlib&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> file = process.argv[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">const</span> server = process.argv[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  hostname: server,</span><br><span class="line">  port: <span class="number">3000</span>,</span><br><span class="line">  path: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">  method: <span class="string">&#x27;PUT&#x27;</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    filename: path.basename(file),</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/octet-stream&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Content-Encoding&#x27;</span>: <span class="string">&#x27;gzip&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = http.request(options, <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Server response: &#x27;</span> + res.statusCode);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">fs.createReadStream(file)</span><br><span class="line">  .pipe(zlib.createGzip())</span><br><span class="line">  .pipe(req)</span><br><span class="line">  .on(<span class="string">&#x27;finish&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;File successfully sent&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="스트림의-문제-해결력"><a href="#스트림의-문제-해결력" class="headerlink" title="스트림의 문제 해결력"></a><strong>스트림의 문제 해결력</strong></h3><p>스트림은 Composition으로 문제 해결을 한다. Express Middleware와 같이 마음껏 파이프라인을 만들어낼 수 있다. </p>
-<ul>
-<li>파이프라인은 각 기능 간에 결합이 없기 때문에 항상 1차원으로 코드가 <u>표현</u>된다. (분기가 없다는 게 아니라 가독성이 좋다는 것.)</li>
-<li>선언형으로 프로그래밍하기 수월하다. 선언형 패러다임은 코드를 요약해서 바라볼 수 있기 때문에 쉽게 이해하기 좋다.</li>
-</ul>
-<blockquote>
-<p>스트림을 기반으로 비동기 이벤트를 처리하는 패러다임을 Reactive라고 하고 이를 위한 RxJS가 있다.</p>
-</blockquote>
-<p>(ex) 암호화 기능 추가</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 복호화</span></span><br><span class="line">.pipe(crypto.createDecipheriv(<span class="string">&quot;aes-192-gcm&quot;</span>, <span class="string">&quot;a_shared_secret&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 암호화</span></span><br><span class="line">.pipe(crypto.createCipheriv(<span class="string">&quot;aes-192-gcm&quot;</span>, <span class="string">&quot;a_shared_secret&quot;</span>))</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="Node-js에서-지원하는-스트림"><a href="#Node-js에서-지원하는-스트림" class="headerlink" title="Node.js에서 지원하는 스트림"></a><strong>Node.js에서 지원하는 스트림</strong></h3><p>Node.js가 지원하는 스트림은 EventEmitter 객체를 상속하며 binary, 문자열 뿐만 아니라 거의 모든 Javascript의 값을 읽을 수 있다. 이러한 스트림에는 크게 네 종류가 있는데 이번 글에서는 (글이 길어지는 관계로) Readable만 다룬다.</p>
-<ul>
-<li>Readable, Writable, Duplex, Transform</li>
-</ul>
-<hr>
-<h4 id="1-Readable"><a href="#1-Readable" class="headerlink" title="1. Readable"></a><strong>1. Readable</strong></h4><p>Readable 스트림은 외부에서 읽기 위한 스트림으로, 자신이 가진 값을 chunk로 써서 내보내는 역할이다. </p>
-<blockquote>
-<p>사용 예:</p>
-<p><code>readable</code> 이벤트에 listener를 등록하고 이벤트 발생 시 버퍼에 있는 내용을 모두 읽기</p>
-</blockquote>
-<blockquote>
-<p>API로는 아래의 함수가 있다.</p>
-<p><code>readable.read([size]) // read는 동기 함수이다.</code></p>
-</blockquote>
-<p>(ex) 표준 입력(stdin) 받아서 표준 출력(<code>console.log</code>, <code>stdout.write</code>)하기</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">process.stdin</span><br><span class="line">  .on(<span class="string">&#x27;readable&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> chunk;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;New data available&#x27;</span>);</span><br><span class="line">    <span class="keyword">while</span>((chunk = process.stdin.read()) !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(</span><br><span class="line">        <span class="string">`Chunk read: (<span class="subst">$&#123;chunk.length&#125;</span>) &quot;<span class="subst">$&#123;chunk.toString()&#125;</span>&quot;`</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> process.stdout.write(<span class="string">&#x27;End of stream&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Stream v1, v2에 따라 non-flowing mode, flowing mode 로 나뉘는데 어차피 v1은 사용되지 않으므로 설명을 생략한다.</p>
-</blockquote>
-<hr>
-<h4 id="ReadableStream을-하나-새로-만드는-예제"><a href="#ReadableStream을-하나-새로-만드는-예제" class="headerlink" title="ReadableStream을 하나 새로 만드는 예제"></a><strong>ReadableStream을 하나 새로 만드는 예제</strong></h4><p>지금까지는 <code>fs</code>, <code>http</code>의 스트림을 그대로 사용했지만 직접 ReadableStream을 만들어 활용할 수도 있다. </p>
-<p><code>stream.Readable</code>을 상속해 abstract function인 <code>_read([size])</code>(public 인터페이스인 <code>read</code>와 헷갈리면 안 된다)를 구현하면 ReadableStream 객체를 하나 만들 수 있다.</p>
-<p>구현을 위해 <code>push(data[, encoding])</code> 함수를 호출해 내부 버퍼에 값을 쓸 수 있다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stream = <span class="built_in">require</span>(<span class="string">&#x27;stream&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> Chance = <span class="built_in">require</span>(<span class="string">&#x27;chance&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> chance = <span class="keyword">new</span> Chance();</span><br><span class="line"></span><br><span class="line"><span class="comment">// [1] 생성</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomStream</span> <span class="keyword">extends</span> <span class="title">stream</span>.<span class="title">Readable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">options</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(options);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">_read</span>(<span class="params">size</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> chunk = chance.string();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Pushing chunk of size: <span class="subst">$&#123;chunk.length&#125;</span>`</span>);</span><br><span class="line">    <span class="built_in">this</span>.push(chunk, <span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span>(chance.bool(&#123;<span class="attr">likelihood</span>: <span class="number">5</span>&#125;)) &#123; </span><br><span class="line">      <span class="built_in">this</span>.push(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [2] 사용</span></span><br><span class="line"><span class="keyword">const</span> RandomStream = <span class="built_in">require</span>(<span class="string">&#x27;./randomStream&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> randomStream = <span class="keyword">new</span> RandomStream();</span><br><span class="line"></span><br><span class="line">randomStream.on(<span class="string">&#x27;readable&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> chunk;</span><br><span class="line">  <span class="keyword">while</span>((chunk = randomStream.read()) !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Chunk received: <span class="subst">$&#123;chunk.toString()&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a><strong>TODO</strong></h3><p>나머지 스트림 종류 다루기</p>
-<p>백 프래셔</p>
-<p>스트림 기반 비동기 제어</p>
-<p>Pipe Composition</p>
-<p>멀티 플렉싱, 디멀티 플렉싱</p>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">이전</a></div><div class="pagination-next"><a href="/page/4/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><a class="pagination-link" href="/page/6/">6</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">52</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">15</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Frontend/"><span class="level-start"><span class="level-item">Frontend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Frontend/React-js/"><span class="level-start"><span class="level-item">React.js</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">22</span></span></a><ul><li><a class="level is-mobile" href="/categories/Linux/NCloud/"><span class="level-start"><span class="level-item">NCloud</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/RabbitMQ/"><span class="level-start"><span class="level-item">RabbitMQ</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/NestJs/"><span class="level-start"><span class="level-item">NestJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-10-03T14:50:00.000Z">21-10-03</time></p><p class="title"><a href="/linux-install-zsh/">ZSH를 WSL2에 설치하는 방법</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-26T14:50:00.000Z">21-09-26</time></p><p class="title"><a href="/linux-shell-2-screen/">screen: 리눅스에서 셸을 유지하면서 나갔다 들어오는 방법</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-19T14:30:00.000Z">21-09-19</time></p><p class="title"><a href="/linux-profile-not-loaded/">왜 .profile 파일이 적용되지 않을까</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-12T13:33:00.000Z">21-09-12</time></p><p class="title"><a href="/linux-debian-dpkg-apt/">데비안 리눅스 패키지 매니저 dpkg와 apt</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-08-29T14:59:00.000Z">21-08-29</time></p><p class="title"><a href="/linux-uptime-top/">uptime, top으로 CPU 부하 확인하기</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">10월 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">9월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">8월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">7월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">6월 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">5월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">4월 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">3월 2021</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">2월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frontend/"><span class="tag">Frontend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">22</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NCloud/"><span class="tag">NCloud</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NestJs/"><span class="tag">NestJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RabbitMQ/"><span class="tag">RabbitMQ</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React-js/"><span class="tag">React.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">이전</a></div><div class="pagination-next"><a href="/page/4/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><a class="pagination-link" href="/page/6/">6</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars0.githubusercontent.com/u/28754907?s=460&amp;v=4" alt="Seongbin Kim"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Seongbin Kim</p><p class="is-size-6 is-block">Previous SW Engineer @ ROKCC</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">53</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">15</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/seongbin9786" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/seongbin9786"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/sphilee/functional-programming-jargon" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">FP Jargon (Javascript, KR)</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CI-CD/"><span class="level-start"><span class="level-item">CI/CD</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Docker/"><span class="level-start"><span class="level-item">Docker</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/ExpressJs/"><span class="level-start"><span class="level-item">ExpressJs</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Frontend/"><span class="level-start"><span class="level-item">Frontend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Frontend/React-js/"><span class="level-start"><span class="level-item">React.js</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">23</span></span></a><ul><li><a class="level is-mobile" href="/categories/Linux/NCloud/"><span class="level-start"><span class="level-item">NCloud</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/RabbitMQ/"><span class="level-start"><span class="level-item">RabbitMQ</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/NestJs/"><span class="level-start"><span class="level-item">NestJs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="level-start"><span class="level-item">Node.js 디자인 패턴</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="level-start"><span class="level-item">함수형 자바스크립트</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-10-10T14:43:00.000Z">21-10-10</time></p><p class="title"><a href="/linux-ipc-unix-domain-socket/">리눅스에서의 IPC Socket vs Network Socket</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-10-03T14:50:00.000Z">21-10-03</time></p><p class="title"><a href="/linux-install-zsh/">ZSH를 WSL2에 설치하는 방법</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-26T14:50:00.000Z">21-09-26</time></p><p class="title"><a href="/linux-shell-2-screen/">screen: 리눅스에서 셸을 유지하면서 나갔다 들어오는 방법</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-19T14:30:00.000Z">21-09-19</time></p><p class="title"><a href="/linux-profile-not-loaded/">왜 .profile 파일이 적용되지 않을까</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-12T13:33:00.000Z">21-09-12</time></p><p class="title"><a href="/linux-debian-dpkg-apt/">데비안 리눅스 패키지 매니저 dpkg와 apt</a></p><p class="categories"><a href="/categories/Linux/">Linux</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">아카이브</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">10월 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">9월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">8월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">7월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">6월 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">5월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">4월 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">3월 2021</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">2월 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">1월 2021</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">12월 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">9월 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">태그</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/1-Month-Docker/"><span class="tag">1 Month Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI/"><span class="tag">CI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CI-CD/"><span class="tag">CI/CD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ExpressJs/"><span class="tag">ExpressJs</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frontend/"><span class="tag">Frontend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub-Actions/"><span class="tag">GitHub Actions</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">23</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NCloud/"><span class="tag">NCloud</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NestJs/"><span class="tag">NestJs</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/"><span class="tag">Node.js 디자인 패턴</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RabbitMQ/"><span class="tag">RabbitMQ</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React-js/"><span class="tag">React.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/"><span class="tag">함수형 자바스크립트</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a><p class="is-size-7"><span>&copy; 2021 Seongbin Kim</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,

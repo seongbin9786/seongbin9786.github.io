@@ -1,105 +1,39 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>uptime, top으로 CPU 부하 확인하기 - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.  “데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.  코드가 예전보다 훨씬 느리게 실행돼 응답이 느려졌다면 무엇부터 확인해야 할까? 시스템의 특정 자원을 모두 소비했기 때문에 시스템이 느려질 수도 있다. 여기서 말하는 자원의 종류로는"><meta property="og:type" content="blog"><meta property="og:title" content="uptime, top으로 CPU 부하 확인하기"><meta property="og:url" content="https://jsqna.com/linux-uptime-top/"><meta property="og:site_name" content="JS QnA"><meta property="og:description" content="이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.  “데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.  코드가 예전보다 훨씬 느리게 실행돼 응답이 느려졌다면 무엇부터 확인해야 할까? 시스템의 특정 자원을 모두 소비했기 때문에 시스템이 느려질 수도 있다. 여기서 말하는 자원의 종류로는"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/images/top_screenshot.png"><meta property="article:published_time" content="2021-08-29T14:59:00.000Z"><meta property="article:modified_time" content="2021-08-28T06:48:07.456Z"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="Linux"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/top_screenshot.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com/linux-uptime-top/"},"headline":"JS QnA","image":["https://jsqna.com/images/top_screenshot.png"],"datePublished":"2021-08-29T14:59:00.000Z","dateModified":"2021-08-28T06:48:07.456Z","author":{"@type":"Person","name":"Seongbin Kim"},"description":"이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.  “데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.  코드가 예전보다 훨씬 느리게 실행돼 응답이 느려졌다면 무엇부터 확인해야 할까? 시스템의 특정 자원을 모두 소비했기 때문에 시스템이 느려질 수도 있다. 여기서 말하는 자원의 종류로는"}</script><link rel="canonical" href="https://jsqna.com/linux-uptime-top/"><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-08-29T14:59:00.000Z" title="2021-08-29T14:59:00.000Z">21-08-29</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-08-28T06:48:07.456Z" title="2021-08-28T06:48:07.456Z">21-08-28</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">7분안에 읽기 (약 1064 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">uptime, top으로 CPU 부하 확인하기</h1><div class="content"><p>이 글은 리눅스 상에서 CPU 자원의 현재 상황을 모니터링하는 방법을 소개한다.</p>
-<blockquote>
-<p>“데브옵스: 개발자, QA, 관리자가 함께 보는 리눅스 서버 트러블슈팅 기법”을 참고했다.</p>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>리눅스에서의 IPC Socket vs Network Socket - JS QnA</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="JS QnA"><meta name="msapplication-TileImage" content="/images/jsqna2.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JS QnA"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Unix Domain Socket은 리눅스 상에서 동작하는 클라이언트-서버 프로세스로 나뉜 소프트웨어에서 자주 사용된다. 예를 들어, Docker에서는 기본 설정으로 TCP Socket이 아닌 Unix Domain Socket으로 dockerd와 docker가 통신한다. 이 경우 외부에서 접속할 수 없다.  비슷하게 MySQL client도 host&amp;#x3D;”l"><meta property="og:type" content="blog"><meta property="og:title" content="리눅스에서의 IPC Socket vs Network Socket"><meta property="og:url" content="https://jsqna.com/linux-ipc-unix-domain-socket/"><meta property="og:site_name" content="JS QnA"><meta property="og:description" content="Unix Domain Socket은 리눅스 상에서 동작하는 클라이언트-서버 프로세스로 나뉜 소프트웨어에서 자주 사용된다. 예를 들어, Docker에서는 기본 설정으로 TCP Socket이 아닌 Unix Domain Socket으로 dockerd와 docker가 통신한다. 이 경우 외부에서 접속할 수 없다.  비슷하게 MySQL client도 host&amp;#x3D;”l"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jsqna.com/img/og_image.png"><meta property="article:published_time" content="2021-10-10T14:43:00.000Z"><meta property="article:modified_time" content="2021-10-10T14:42:14.470Z"><meta property="article:author" content="Seongbin Kim"><meta property="article:tag" content="Linux"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jsqna.com/linux-ipc-unix-domain-socket/"},"headline":"JS QnA","image":["https://jsqna.com/img/og_image.png"],"datePublished":"2021-10-10T14:43:00.000Z","dateModified":"2021-10-10T14:42:14.470Z","author":{"@type":"Person","name":"Seongbin Kim"},"description":"Unix Domain Socket은 리눅스 상에서 동작하는 클라이언트-서버 프로세스로 나뉜 소프트웨어에서 자주 사용된다. 예를 들어, Docker에서는 기본 설정으로 TCP Socket이 아닌 Unix Domain Socket으로 dockerd와 docker가 통신한다. 이 경우 외부에서 접속할 수 없다.  비슷하게 MySQL client도 host&#x3D;”l"}</script><link rel="canonical" href="https://jsqna.com/linux-ipc-unix-domain-socket/"><link rel="icon" href="/images/jsqna2.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/jsqna.png" alt="JS QnA" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/seongbin9786/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-10-10T14:43:00.000Z" title="2021-10-10T14:43:00.000Z">21-10-10</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2021-10-10T14:42:14.470Z" title="2021-10-10T14:42:14.470Z">21-10-10</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">6분안에 읽기 (약 904 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">리눅스에서의 IPC Socket vs Network Socket</h1><div class="content"><blockquote>
+<p>Unix Domain Socket은 리눅스 상에서 동작하는 클라이언트-서버 프로세스로 나뉜 소프트웨어에서 자주 사용된다. 예를 들어, Docker에서는 기본 설정으로 TCP Socket이 아닌 Unix Domain Socket으로 dockerd와 docker가 통신한다. 이 경우 외부에서 접속할 수 없다. </p>
+<p>비슷하게 MySQL client도 host=”localhost”인 경우 Unix Socket을 사용한다.</p>
 </blockquote>
-<p>코드가 예전보다 훨씬 느리게 실행돼 응답이 느려졌다면 무엇부터 확인해야 할까?</p>
-<p>시스템의 특정 자원을 모두 소비했기 때문에 시스템이 느려질 수도 있다.</p>
-<p>여기서 말하는 자원의 종류로는</p>
-<ul>
-<li>CPU</li>
-<li>Main Memory</li>
-<li>Disk I/O</li>
-<li>Network I/O </li>
-</ul>
-<p>이 있고, 이 글은 CPU 부하에 한정해 소개한다.</p>
+<p>이 글은 Unix Domain Socket이란 무엇이고, 그 사용 예와 특징에 대해 서술한다.</p>
 <hr>
-<h4 id="uptime"><a href="#uptime" class="headerlink" title="uptime"></a><strong>uptime</strong></h4><p><code>load average</code> 다음의 세 실수값이 중요하다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ uptime</span><br><span class="line"> 05:23:41 up 5 days,  1:41,  0 users,  load average: 0.00, 0.00, 0.00</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>System load averages is the average number of processes that are either in a runnable or uninterruptable state.  A  process  in  a runnable  state is either using the CPU or waiting to use the CPU.  A process in uninterruptable state is waiting for some I/O access, eg waiting for disk.  The averages are taken over the three time intervals.  Load averages are not normalized for the number of  CPUs  in a system, so a load average of 1 means a single CPU system is loaded all the time while on a 4 CPU system it means it was idle 75% of the time.</p>
-<p>[man uptime]</p>
-</blockquote>
-<p>load average는 실행 중 혹은 인터럽트 불가능한 상태의 프로세스의 평균 개수이다. </p>
-<ul>
-<li>실행 중인 프로세스: CPU를 사용 중이거나 CPU 사용을 기다리는 중인 프로세스</li>
-<li>인터럽트 불가능한 프로세스: I/O 접근을 대기하는 프로세스</li>
-</ul>
-<p>예를 들어 average가 <code>1.00</code>이면 항상 1개의 프로세스가 실행 된다는 것으로 1개의 코어의 로드가 100%라는 의미이다.</p>
-<blockquote>
-<p>[<a target="_blank" rel="noopener" href="https://superuser.com/questions/1105654/logical-vs-physical-cpu-performance">superuser</a>]</p>
-<p>멀티코어 CPU에서는 코어 별로 독립적인(병렬적인, parallel) 프로세스(스레드) 실행이 가능하기 때문에 프로세스 개수가 n이면 <code>n</code>이 전체 코어의 로드가 100%임을 나타내는 것이다.</p>
-<p>Hyperthreading이 적용되어 CPU에서 2배의 스레드 실행이 가능한 경우 <code>2n</code>이 100%의 로드를 나타낼 것이다. </p>
-<ul>
-<li>(ex) <a target="_blank" rel="noopener" href="https://ark.intel.com/content/www/kr/ko/ark/products/212282/intel-xeon-platinum-8358-processor-48m-cache-2-60-ghz.html">코어 수 32, 스레드 수 64인 Xeon 프로세서</a>의 경우 64.00이 100%의 로드를 나타낸다.</li>
-</ul>
-</blockquote>
-<p>다시 돌아와서, <code>uptime</code>이 표시하는 세 개의 숫자는 <strong>각각 최근 1분, 5분, 15분</strong>의 프로세스 평균 개수를 의미한다.</p>
-<p>최근 1분의 부하는 현재 시스템에 가해지는 부하를 나타내는 것이다.</p>
-<p>아래의 예시를 살펴보자.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ uptime</span><br><span class="line"> 05:23:41 up 25 days,  1:41,  2 users,  load average: 17.29, 1.12, 0.10</span><br></pre></td></tr></table></figure>
-<p>최근 15분간의 로드가 거의 없던 것에 비해 현재 1분의 로드가 꽤 큰 것을 확인할 수 있다.</p>
-<ul>
-<li>따라서 부하는 최근에 시작됐음을 확인할 수 있다.</li>
-</ul>
+<h3 id="1-Socket의-종류"><a href="#1-Socket의-종류" class="headerlink" title="1. Socket의 종류"></a><strong>1. Socket의 종류</strong></h3><p>POSIX(리눅스/유닉스)에는 소켓이 2 종류가 존재한다.</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Unix_domain_socket">IPC Socket</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Network_socket">Network Socket</a></li>
+</ol>
+<p>여기서 Network Socket은 IP Socket, 즉 TCP, UDP 통신에 쓰이는 소켓이며, IPC Socket은 오늘의 주제인 Unix Domain Socket을 의미한다.</p>
 <hr>
-<h4 id="top"><a href="#top" class="headerlink" title="top"></a><strong>top</strong></h4><p>top은 기본값으로 CPU 사용률로 프로세스 정보를 나열하는 유틸이지만, 상단에 표시된 <code>%Cpu(s)</code>행은 CPU 정보를 표시한다.</p>
-<p><img src="/images/top_screenshot.png"></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Full Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>us</td>
-<td>User CPU time</td>
-<td>사용자 프로세스가 소비한 CPU 사용량 비율 (nice가 적용되지 않은)</td>
-</tr>
-<tr>
-<td>sy</td>
-<td>System CPU time</td>
-<td>커널과 커널 프로세스의 CPU 사용량 비율</td>
-</tr>
-<tr>
-<td>ni</td>
-<td>nice CPU time</td>
-<td>nice가 적용된 프로세스의 CPU 사용량 비율</td>
-</tr>
-<tr>
-<td>id</td>
-<td>CPU idle time</td>
-<td>CPU가 사용되지 않는 유휴 비율</td>
-</tr>
-<tr>
-<td>wa</td>
-<td>I/O wait</td>
-<td>CPU가 I/O를 대기하면서 소비한 시간의 비율</td>
-</tr>
-<tr>
-<td>hi</td>
-<td>hardware interrupts</td>
-<td>하드웨어 인터럽트를 제공하는데 CPU가 소비한 시간의 비율</td>
-</tr>
-<tr>
-<td>si</td>
-<td>software interrupts</td>
-<td>소프트웨어 인터럽트를 제공하는데 CPU가 소비한 시간의 비율</td>
-</tr>
-<tr>
-<td>st</td>
-<td>steal time</td>
-<td>(비교적 세부 사항이라 생략)</td>
-</tr>
-</tbody></table>
-<p>위 표에서 가장 중요한 값은 <code>wa</code>라고 한다. 이 값이 낮으면 I/O가 문제가 아니라고 한다.</p>
-<p>I/O 대기(<code>wa</code>)와 유휴 시간(<code>id</code>)이 모두 낮으면 사용자 CPU 사용률(<code>us</code>)을 확인하고 어떤 프로세스가 높은 CPU 사용량을 보이는지 확인해야 한다.</p>
-<p>I/O 대기는 낮은데 유휴 시간은 높다면 병목은 CPU가 아니다. (당연하다. 유휴시간이 있다는 것 자체가..)</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>uptime, top으로 CPU 부하 확인하기</p><p><a href="https://jsqna.com/linux-uptime-top/">https://jsqna.com/linux-uptime-top/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Seongbin Kim</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>21-08-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>21-08-28</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Linux/">Linux</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/linux-debian-dpkg-apt/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">데비안 리눅스 패키지 매니저 dpkg와 apt</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/linux-rmq-monitoring-easy/"><span class="level-item">리눅스에서 tmux와 rabbitmqctl을 이용한 Queue 잔여 메시지 모니터링하기</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'https://jsqna.com/linux-uptime-top/';
-            this.page.identifier = 'linux-uptime-top/';
+<h3 id="2-Unix-Domain-Socket"><a href="#2-Unix-Domain-Socket" class="headerlink" title="2. Unix Domain Socket"></a><strong>2. Unix Domain Socket</strong></h3><p>[<a target="_blank" rel="noopener" href="https://serverfault.com/questions/124517/what-is-the-difference-between-unix-sockets-and-tcp-ip-sockets">StackOverFlow</a>]<br>[<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Unix_domain_socket">Wikipedia</a>]</p>
+<p>Unix Domain Socket, 줄여서 UDS는 <a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EA%B0%84_%ED%86%B5%EC%8B%A0">IPC</a>의 종류 중 하나로, TCP, UDP에 대응되는 API (<code>SOCK_STREAM</code>, <code>SOCK_DGRAM</code>)가 있기 때문에 소켓의 file descriptor를 할당 받는 구문만 변경하면 네트워크 소켓을 썼을 때와 같은 코드를 사용할 수 있게 된다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// sockaddr 대신 socketaddr_un 구조체 사용</span></span><br><span class="line"><span class="comment">// 이 구조체는 내부 필드 sun_path에 UDS의 경로를 입력받는다. (포트 대신에!)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> <span class="title">addr</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 네트워크 소켓이라면 AF_INET을, UDS 라면 AF_UNIX 를 사용한다.</span></span><br><span class="line"><span class="keyword">if</span> ((client_sockfd = socket(AF_UNIX, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>자세한 UDS 코드에 대해선 간결한 설명은 <a target="_blank" rel="noopener" href="https://yaaam.tistory.com/entry/LinuxUDSUnix-Domain-Socket-UDS">이 블로그</a>를 참고하고, 자세한 설명은 <a target="_blank" rel="noopener" href="http://www.dreamy.pe.kr/zbxe/CodeClip/119393">이 블로그</a>를 참고하면 좋을 것 같다.</p>
+<hr>
+<p>UDS를 사용할 경우 하부의 네트워크 프로토콜을 거치지 않고 OS 커널만을 통해서 통신이 이루어진다. 따라서 UDP를 사용한 코드더라도 UDS를 쓴다면 항상 순서가 보장되는 등 네트워크의 불확실성이 모두 제거된다. </p>
+<p>참고로 IPC의 경우 UDS보다 더 빠른 방법들이 많다 - 가장 빠른 것은 shared memory 방법이라고 한다 [<a target="_blank" rel="noopener" href="https://blog.daum.net/tlos6733/159">IPC 성능 측정에 대한 글</a>]. 해당 링크를 따라가면 알겠지만 IPC 방법 중에는 메모리 복사를 줄일 수 있는 방법이 많은 데 비해 UDS가 가장 많은 메모리 복사를 하는 것을 알 수 있다.</p>
+<hr>
+<h3 id="UDS는-리눅스의-파일-권한을-따르므로-통신에-대한-권한을-제어할-수-있다"><a href="#UDS는-리눅스의-파일-권한을-따르므로-통신에-대한-권한을-제어할-수-있다" class="headerlink" title="UDS는 리눅스의 파일 권한을 따르므로, 통신에 대한 권한을 제어할 수 있다."></a><strong>UDS는 리눅스의 파일 권한을 따르므로, 통신에 대한 권한을 제어할 수 있다.</strong></h3><p>Linux는 소켓도 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Unix_file_types">파일로 관리</a>하는데, UDS는 파일 속성의 첫 글자가 <code>srwxrwxrwx</code>와 같이 <code>s</code>이다. Network 소켓도 소켓이기 때문에 파일이긴 하지만, UDS는 파일 이름이 있고, <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/a/116568">Network Socket은 파일 이름이 없어서(unnamed)</a> 포트로 접근해야 한다. UDS 소켓 코드를 보면, UDS 소켓의 경로를 알고, 해당 파일에 대한 권한이 있으면 해당 소켓으로 통신을 수행할 수 있다. 따라서 해당 소켓 파일에 대한 접근 권한을 통해 통신 권한도 조절할 수 있다!</p>
+<hr>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a><strong>TODO</strong></h3><ol>
+<li><p>Socket 프로그래밍 해보고 실제 코드 차이에 대해 더 뜯어보기</p>
+</li>
+<li><p>loopback IP에서의 overhead 비교해보기</p>
+</li>
+<li><p>다른 IPC 메커니즘과 성능 비교해보기</p>
+</li>
+</ol>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>리눅스에서의 IPC Socket vs Network Socket</p><p><a href="https://jsqna.com/linux-ipc-unix-domain-socket/">https://jsqna.com/linux-ipc-unix-domain-socket/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Seongbin Kim</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>21-10-10</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>21-10-10</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Linux/">Linux</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/linux-install-zsh/"><span class="level-item">ZSH를 WSL2에 설치하는 방법</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jsqna.com/linux-ipc-unix-domain-socket/';
+            this.page.identifier = 'linux-ipc-unix-domain-socket/';
         };
         (function() {
             var d = document, s = d.createElement('script');  
